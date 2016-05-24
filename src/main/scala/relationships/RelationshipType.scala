@@ -4,12 +4,12 @@ package relationships
   * Created by sal on 23/05/16.
   */
 
-case class RelationshipType(name:String, inverse_name:String, registry:RelationshipRegistry) {
-
+class RelationshipType(name:String, _inverse: =>RelationshipType, registry:RelationshipRegistry) {
   def newRelationship(a: Thing, b: Thing): Relationship = {
     new Relationship(a,b,this)
   }
 
-  def inverse = registry.getByName(inverse_name)
+
+  lazy val inverse:RelationshipType = _inverse
 
 }

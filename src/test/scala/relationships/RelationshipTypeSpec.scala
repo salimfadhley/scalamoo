@@ -8,11 +8,11 @@ import org.scalatest.{FlatSpec, Matchers}
 class RelationshipTypeSpec extends FlatSpec with Matchers {
 
   "RelationshipType" should "be namable" in {
-    val foo = new RelationshipType(name="Above", "below", null)
+    val foo = new RelationshipType(name="Above", null, null)
   }
 
   it should "be alble to create new relationship instances" in {
-    val foo = new RelationshipType(name="Above", "below", null)
+    val foo = new RelationshipType(name="Above", null, null)
 
     val a:Thing = new Thing("Thing 1")
     val b:Thing = new Thing("Thing 2")

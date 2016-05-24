@@ -14,8 +14,8 @@ case class RelationshipRegistry(name:String="xxx") {
   }
 
   def createRelationshipPairs(a: String, b: String): RelationshipPair = {
-    val aa:RelationshipType = new RelationshipType(a,b, this)
-    val bb:RelationshipType = new RelationshipType(b,a, this)
+    lazy val aa:RelationshipType = new RelationshipType(a,new RelationshipType(b, aa, this), this)
+    val bb:RelationshipType = aa.inverse
 
     relationshipsTypes.put(a, aa)
     relationshipsTypes.put(b, bb)
