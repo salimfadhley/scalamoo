@@ -19,8 +19,8 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
 
     val rel:Relationship = foo.newRelationship(a,b)
 
-    assert(rel.inverse.b == a)
-    assert(rel.inverse.a == b)
+    assert(rel.inverse.b === a)
+    assert(rel.inverse.a === b)
   }
 
 }
