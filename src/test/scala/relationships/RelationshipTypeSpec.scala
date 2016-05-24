@@ -13,14 +13,24 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
 
   it should "be alble to create new relationship instances" in {
     val foo = new RelationshipType(name="Above", null, null)
-
     val a:Thing = new Thing("Thing 1")
     val b:Thing = new Thing("Thing 2")
-
     val rel:Relationship = foo.newRelationship(a,b)
 
     assert(rel.inverse.b === a)
     assert(rel.inverse.a === b)
+  }
+
+  it should "store a reference to it's registry" in {
+    val rr = new RelationshipRegistry(name="RR")
+    val foo = new RelationshipType(name="Above", null, rr)
+    val a:Thing = new Thing("Thing 1")
+    val b:Thing = new Thing("Thing 2")
+    val rel:Relationship = foo.newRelationship(a,b)
+
+    assert(rel.relationshipType === foo)
+    assert(rel.relationshipType.registry === rr)
+
   }
 
 }

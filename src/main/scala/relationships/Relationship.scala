@@ -3,8 +3,9 @@ package relationships
 /**
   * Created by sal on 24/05/16.
   */
-case class Relationship(a:Thing, b:Thing, relationshipType:RelationshipType) {
-  def inverse = {
-    Relationship(b,a, relationshipType.inverse)
-  }
+class Relationship(_a:Thing, _b:Thing, _relationshipType:RelationshipType, _inverse: => Relationship) {
+  lazy val inverse:Relationship = _inverse
+  val a:Thing = _a
+  val b:Thing = _b
+  val relationshipType = _relationshipType
 }
