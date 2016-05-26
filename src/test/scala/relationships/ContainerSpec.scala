@@ -11,13 +11,13 @@ class ContainerSpec extends FlatSpec with Matchers {
     val t = new Thing("foo")
     val c = new Container("bar", null)
     c.add(t)
-    assert(c.contains(t)==true)
+    assert(c.contains(t))
   }
 
   it should "only contain objects that were stored in the container" in {
     val t = new Thing("foo")
     val c = new Container("bar", null)
-    assert(c.contains(t)==false)
+    assert(!c.contains(t))
   }
 
   it should "Be able to contain Containers" in {
@@ -25,8 +25,8 @@ class ContainerSpec extends FlatSpec with Matchers {
     val c2 = new Container("z", null)
     val c = new Container("y", null)
     c.add(c1)
-    assert(c.contains(c1)==true)
-    assert(c.contains(c2)==false)
+    assert(c.contains(c1))
+    assert(!c.contains(c2))
   }
 
   it should "have a reference to a relationship registry" in {
@@ -43,9 +43,10 @@ class ContainerSpec extends FlatSpec with Matchers {
 
     rr.createRelationshipPairs("Above", "Below")
 
-    c.relate(t1, t2, "Above")
+    val r: Relationship = c.relate(t1, t2, "Above")
 
-    //    c.getRelationships(t1, t2).toList() should equal (list(rr.get))
+    c.getRelationships(t1, t2).toList should contain(r)
+    c.getRelationships(t1, t2).toList should have size 1
 
   }
 
@@ -55,10 +56,7 @@ class ContainerSpec extends FlatSpec with Matchers {
 
     ab.a should be(rr.getByName("Above"))
     ab.b should be(rr.getByName("Below"))
-
-
   }
-
 
 
 }
