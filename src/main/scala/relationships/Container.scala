@@ -13,4 +13,9 @@ class Container(_name: String, _registry: RelationshipRegistry) extends Thing(_n
   def contains(t: Thing):Boolean = {
     contents.contains(t.name)
   }
+
+  def relate(t1: Thing, t2: Thing, s: String): Any = {
+
+  }
+
 }

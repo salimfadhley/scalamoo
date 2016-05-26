@@ -32,7 +32,7 @@ class RelationshipRegistrySpec extends FlatSpec with Matchers {
     val rr = new RelationshipRegistry(name="Foo")
     val rp = rr.createRelationshipPairs(a="Above", b="Below")
 
-//    assert(rp.a.inverse == rp.b)
+    assert(rp.a.inverse == rp.b)
     assert(rp.b.inverse == rp.a)
 
   }

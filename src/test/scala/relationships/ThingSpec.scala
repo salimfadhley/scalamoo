@@ -12,4 +12,10 @@ class ThingSpec extends FlatSpec with Matchers {
     assert(t.name == "blob")
   }
 
+  it can "have a proptotype" in {
+    val prototype = new Prototype("pen")
+    val t = new Thing("Salim's pen", prototype)
+
+  }
+
 }

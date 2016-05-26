@@ -21,7 +21,8 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
     assert(rel.inverse.a === b)
   }
 
-  it should "store a reference to it's registry" in {
+
+  it should "store a reference to i's registry" in {
     val rr = new RelationshipRegistry(name="RR")
     val foo = new RelationshipType(name="Above", null, rr)
     val a:Thing = new Thing("Thing 1")
