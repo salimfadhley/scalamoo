@@ -9,7 +9,7 @@ class RelationshipType(name:String, _inverse: =>RelationshipType, _registry:Rela
   val registry:RelationshipRegistry = _registry
 
   def newRelationship(a: Thing, b: Thing): Relationship = {
-    lazy val rr:Relationship = new Relationship(a,b,this, new Relationship(b,a, this.inverse, rr))
+    lazy val rr: Relationship = new Relationship(a, b, this, new Relationship(b, a, this.inverse, rr, false), true)
     rr
   }
 

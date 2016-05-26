@@ -27,9 +27,22 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
     val a:Thing = new Thing("Thing 1")
     val b:Thing = new Thing("Thing 2")
     val rel:Relationship = foo.newRelationship(a,b)
-
     assert(rel.relationshipType === foo)
     assert(rel.relationshipType.registry === rr)
+  }
+
+  it should "identify which is the canonical order of the relationship" in {
+    val rr = new RelationshipRegistry(name = "RR")
+    val foo = new RelationshipType(name = "Above", null, rr)
+    val a: Thing = new Thing("Thing 1")
+    val b: Thing = new Thing("Thing 2")
+    val rel: Relationship = foo.newRelationship(a, b)
+
+    withClue("inverse") {
+      rel.canonical should be(true)
+      rel.inverse.canonical should be(false)
+      rel.inverse.inverse.canonical should be(true)
+    }
 
   }
 
