@@ -3,8 +3,9 @@ import scala.collection.mutable.HashMap
 /**
   * Created by sal on 24/05/16.
   */
-class Container(_name:String) extends Thing(_name) {
+class Container(_name: String, _registry: RelationshipRegistry) extends Thing(_name) {
   val contents = new HashMap[String,Thing]()
+  val registry: RelationshipRegistry = _registry
 
   def add(thing: Thing): Unit = {
     contents.put(thing.name, thing)
