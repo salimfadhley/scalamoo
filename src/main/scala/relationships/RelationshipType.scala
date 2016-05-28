@@ -4,8 +4,9 @@ package relationships
   * Created by sal on 23/05/16.
   */
 
-class RelationshipType(name: String, _inverse: => RelationshipType, _registry: RelationshipTypeRegistry) {
+class RelationshipType(_name: String, _inverse: => RelationshipType, _registry: RelationshipTypeRegistry) {
   lazy val inverse:RelationshipType = _inverse
+  val name: String = _name
   val registry: RelationshipTypeRegistry = _registry
 
   def newRelationship(a: Thing, b: Thing): Relationship = {
