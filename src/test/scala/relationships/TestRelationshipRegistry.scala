@@ -5,23 +5,23 @@ import org.scalatest.{FlatSpec, Matchers}
 /**
   * Created by sal on 09/05/16.
   */
-class RelationshipRegistrySpec extends FlatSpec with Matchers {
+class RelationshipTypeRegistrySpec extends FlatSpec with Matchers {
 
   "A relationships.RelationshipRegistry" should "be creatable" in {
-    new RelationshipRegistry()
+    new RelationshipTypeRegistry()
   }
 
   it should "be namable" in {
-    new RelationshipRegistry(name="Foo")
+    new RelationshipTypeRegistry(name = "Foo")
   }
 
   it should "have the ability to create new types of relationship" in {
-    val rr = new RelationshipRegistry(name="Foo")
-    val rp:RelationshipPair = rr.createRelationshipPairs(a="Above", b="Below")
+    val rr = new RelationshipTypeRegistry(name = "Foo")
+    val rp: RelationshipTypePair = rr.createRelationshipPairs(a = "Above", b = "Below")
   }
 
   it should "thow an error when we ask for a relationship that does not exist" in {
-    val rr = new RelationshipRegistry(name="Foo")
+    val rr = new RelationshipTypeRegistry(name = "Foo")
     intercept[UnknownRelationshipTypeException] {
       rr.getByName("XXX")
     }
@@ -29,12 +29,17 @@ class RelationshipRegistrySpec extends FlatSpec with Matchers {
 
 
   it should "create pairs of inverse relationships" in {
-    val rr = new RelationshipRegistry(name="Foo")
+    val rr = new RelationshipTypeRegistry(name = "Foo")
     val rp = rr.createRelationshipPairs(a="Above", b="Below")
-
     assert(rp.a.inverse == rp.b)
     assert(rp.b.inverse == rp.a)
+  }
 
+  it should "be able to retrieve a relationship by name" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    val ab: RelationshipTypePair = rr.createRelationshipPairs("Above", "Below")
+    ab.a should be(rr.getByName("Above"))
+    ab.b should be(rr.getByName("Below"))
   }
 
 }

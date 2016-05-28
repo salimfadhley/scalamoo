@@ -23,7 +23,7 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
 
 
   it should "store a reference to i's registry" in {
-    val rr = new RelationshipRegistry(name="RR")
+    val rr = new RelationshipTypeRegistry(name = "RR")
     val foo = new RelationshipType(name="Above", null, rr)
     val a:Thing = new Thing("Thing 1")
     val b:Thing = new Thing("Thing 2")
@@ -33,7 +33,7 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
   }
 
   it should "identify which is the canonical order of the relationship" in {
-    val rr = new RelationshipRegistry(name = "RR")
+    val rr = new RelationshipTypeRegistry(name = "RR")
     val foo = new RelationshipType(name = "Above", null, rr)
     val a: Thing = new Thing("Thing 1")
     val b: Thing = new Thing("Thing 2")

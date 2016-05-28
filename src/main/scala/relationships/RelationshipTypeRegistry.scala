@@ -3,7 +3,7 @@ package relationships
 /**
   * Created by sal on 23/05/16.
   */
-case class RelationshipRegistry(name:String="xxx") {
+case class RelationshipTypeRegistry(name: String = "xxx") {
 
   val relationshipsTypes = scala.collection.mutable.HashMap.empty[String,RelationshipType]
 
@@ -14,13 +14,13 @@ case class RelationshipRegistry(name:String="xxx") {
     }
   }
 
-  def createRelationshipPairs(a: String, b: String): RelationshipPair = {
+  def createRelationshipPairs(a: String, b: String): RelationshipTypePair = {
     lazy val aa:RelationshipType = new RelationshipType(a,new RelationshipType(b, aa, this), this)
     val bb:RelationshipType = aa.inverse
 
     relationshipsTypes.put(a, aa)
     relationshipsTypes.put(b, bb)
 
-    new RelationshipPair(aa, bb)
+    new RelationshipTypePair(aa, bb)
   }
 }

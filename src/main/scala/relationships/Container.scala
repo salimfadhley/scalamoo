@@ -4,11 +4,11 @@ import scala.collection.mutable
 /**
   * Created by sal on 24/05/16.
   */
-class Container(_name: String, _registry: RelationshipRegistry) extends Thing(_name) {
+class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thing(_name) {
   val contents: mutable.Map[String, Thing] = new mutable.HashMap[String, Thing]()
   val relationships: mutable.Set[Relationship] = new mutable.HashSet[Relationship]()
 
-  val registry: RelationshipRegistry = _registry
+  val registry: RelationshipTypeRegistry = _registry
 
   def getRelationships(t1: Thing, t2: Thing): Set[Relationship] = {
     relationships.filter((r: Relationship) => true).toSet
