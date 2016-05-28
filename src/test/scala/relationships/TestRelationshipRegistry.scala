@@ -42,4 +42,14 @@ class RelationshipTypeRegistrySpec extends FlatSpec with Matchers {
     ab.b should be(rr.getByName("Below"))
   }
 
+  it should "remember previously generated relationships" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    val ab0: RelationshipTypePair = rr.createRelationshipPairs("Above", "Below")
+    val ab1: RelationshipTypePair = rr.createRelationshipPairs("Above", "Below")
+
+    ab0.a should be(ab1.a)
+    ab0.b should be(ab1.b)
+
+  }
+
 }
