@@ -20,6 +20,14 @@ class ContainerSpec extends FlatSpec with Matchers {
     assert(!c.contains(t))
   }
 
+  it should "not duplicate items stored twice" in {
+    val t = new Thing("foo")
+    val c = new Container("bar", null)
+    c.add(t)
+    c.add(t)
+    c.contains(t) should be(true)
+  }
+
   it should "Be able to contain Containers" in {
     val c1 = new Container("x", null)
     val c2 = new Container("z", null)
@@ -45,8 +53,6 @@ class ContainerSpec extends FlatSpec with Matchers {
     c.getRelationships(t1, t2).toList should contain(r)
     c.getRelationships(t1, t2).toList should have size 1
   }
-
-
 
 
 }
