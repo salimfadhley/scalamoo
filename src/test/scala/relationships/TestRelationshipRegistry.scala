@@ -46,10 +46,27 @@ class RelationshipTypeRegistrySpec extends FlatSpec with Matchers {
     val rr = new RelationshipTypeRegistry("xxx")
     val ab0: RelationshipTypePair = rr.createRelationshipPairs("Above", "Below")
     val ab1: RelationshipTypePair = rr.createRelationshipPairs("Above", "Below")
-
     ab0.a should be(ab1.a)
     ab0.b should be(ab1.b)
-
   }
+
+  it should "prevent previously generated relationships from being redefined" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    val ab0: RelationshipTypePair = rr.createRelationshipPairs("Above", "Below")
+
+    intercept[RedefinitionOfRelationshipException] {
+      val ab1: RelationshipTypePair = rr.createRelationshipPairs("Above", "XXXX")
+    }
+  }
+
+  it should "prevent previously generated inverse relationships from being redefined" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    val ab0: RelationshipTypePair = rr.createRelationshipPairs("Above", "Below")
+
+    intercept[RedefinitionOfRelationshipException] {
+      val ab1: RelationshipTypePair = rr.createRelationshipPairs("XXXX", "Below")
+    }
+  }
+
 
 }

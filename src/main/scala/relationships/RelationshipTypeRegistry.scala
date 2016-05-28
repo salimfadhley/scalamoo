@@ -4,7 +4,7 @@ package relationships
   * Created by sal on 23/05/16.
   */
 
-case class RedefinitionOfRelationship(message: String) extends Exception(message)
+case class RedefinitionOfRelationshipException(message: String) extends RuntimeException(message)
 
 case class RelationshipTypeRegistry(name: String = "xxx") {
 
@@ -21,8 +21,8 @@ case class RelationshipTypeRegistry(name: String = "xxx") {
 
     (relationshipsTypes.get(a), relationshipsTypes.get(b)) match {
       case (Some(aa), Some(bb)) => return RelationshipTypePair(aa, bb)
-      case (Some(aa), None) => throw new RedefinitionOfRelationship(a)
-      case (None, Some(bb)) => throw new RedefinitionOfRelationship(b)
+      case (Some(aa), None) => throw new RedefinitionOfRelationshipException(a)
+      case (None, Some(bb)) => throw new RedefinitionOfRelationshipException(b)
       case (None, None) => {
         lazy val aa: RelationshipType = new RelationshipType(a, new RelationshipType(b, aa, this), this)
         val bb: RelationshipType = aa.inverse
