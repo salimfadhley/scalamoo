@@ -1,5 +1,6 @@
 package relationships
 
+import game.World
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
@@ -96,7 +97,11 @@ class ContainerSpec extends FlatSpec with Matchers {
 
   }
 
-  //  it should "not re-create identical relationships" in {
+  it should "not contain the world" in {
+    val w = new World("The World")
+    val c = new Container("x", null)
 
+
+  }
 
 }

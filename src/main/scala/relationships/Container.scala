@@ -1,5 +1,8 @@
 package relationships
 
+
+class CannotContain(message: String) extends RuntimeException(message)
+
 import scala.collection.mutable
 /**
   * Created by sal on 24/05/16.
@@ -37,7 +40,13 @@ class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thin
   }
 
   def add(thing: Thing): Unit = {
-    contents.put(thing.sn, thing)
+    if (canContain(thing)) {
+      contents.put(thing.sn, thing)
+    }
+  }
+
+  def canContain(thing: Thing): Boolean = {
+    true
   }
 
   def hasRelationship(t1: Thing, t2: Thing, s: String): Boolean = {
