@@ -155,20 +155,21 @@ class ContainerSpec extends FlatSpec with Matchers {
     val c = new Container("x", null)
   }
 
-  //  it should "be able to list relationships from a single object's perspective" in {
-  //    val rr = new RelationshipTypeRegistry("xxx")
-  //    val c = new Container("x", _registry = rr)
-  //    val t1 = new Thing("Thing 1")
-  //    val t2 = new Thing("Thing 2")
-  //    val t3 = new Thing("Thing 3")
-  //    rr.createRelationshipPairs("Above", "Below")
-  //
-  //    val r0 = c.relate(t1, t2, "Above") // t1 is above t2
-  //    val r1 = c.relate(t2, t3, "Above") // t2 is above t3
-  //
-  //    c.relationships.toList should have length 3
-  //    c.getRelationships(t2).toList should have length 2
-  //
-  //  }
+  it should "be able to list relationships from a single object's perspective" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    val c = new Container("x", _registry = rr)
+    val t1 = new Thing("Thing 1")
+    val t2 = new Thing("Thing 2")
+    val t3 = new Thing("Thing 3")
+    rr.createRelationshipPairs("Above", "Below")
+
+    val r0 = c.relate(t1, t2, "Above") // t1 is above t2
+    val r1 = c.relate(t2, t3, "Above") // t2 is above t3
+
+    c.getRelationships(t2).toList should have length 2
+    c.getRelationships(t1).toList should have length 1
+    c.getRelationships(t3).toList should have length 1
+
+  }
 
 }
