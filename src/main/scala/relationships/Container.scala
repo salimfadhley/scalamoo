@@ -21,6 +21,10 @@ class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thin
     relationships.filter(_.relatesTo(t)).map(_.fromPerspective(t))
   }
 
+  def getById(x: Int): Option[Thing] = {
+    contents.get(x)
+  }
+
   def contains(t: Thing):Boolean = {
     contents.contains(t.sn)
   }

@@ -34,8 +34,17 @@ class WorldSpec extends FlatSpec with Matchers {
 
     l1.exits.toList(0).direction should be(w.registry.getByName("North"))
     l1.exits.toList(0).to should be(l0)
+  }
 
+  it can "have a default location" in {
+    val w = new World("The Earth")
+    val l0: Location = w.newLocation("The First Room")
+    val l1: Location = w.newLocation("The Second Room")
+    w.add(l0)
+    w.add(l1)
+    w.defaultLocation shouldEqual Some(l0)
 
   }
+
 
 }
