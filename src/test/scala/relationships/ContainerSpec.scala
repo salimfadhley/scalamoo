@@ -81,7 +81,7 @@ class ContainerSpec extends FlatSpec with Matchers {
 
   }
 
-  it should "be able to find a relationship" in {
+  it should "not be able to find a mising relationship" in {
     val rr = new RelationshipTypeRegistry("xxx")
     val c = new Container("x", _registry = rr)
     val t1 = new Thing("Thing 1")
@@ -97,11 +97,78 @@ class ContainerSpec extends FlatSpec with Matchers {
 
   }
 
+  it should "not find relationships which do not match" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    val c = new Container("x", _registry = rr)
+    val t1 = new Thing("Thing 1")
+    val t2 = new Thing("Thing 2")
+    rr.createRelationshipPairs("Above", "Below")
+    rr.createRelationshipPairs("Left", "Right")
+    c.relate(t1, t2, "Above")
+
+    val result: Option[Relationship] = c.find(t1, t2, "Left")
+
+    val foo = result match {
+      case Some(_: Relationship) => throw new RuntimeException("Unexpected!")
+      case None => null
+    }
+
+  }
+
+  it should "not find relationships of the same type but for different objects" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    val c = new Container("x", _registry = rr)
+    val t1 = new Thing("Thing 1")
+    val t2 = new Thing("Thing 2")
+    val t3 = new Thing("Thing 3")
+    rr.createRelationshipPairs("Above", "Below")
+    c.relate(t1, t2, "Above")
+
+    val result: Option[Relationship] = c.find(t1, t3, "Above")
+
+    val foo = result match {
+      case Some(_: Relationship) => throw new RuntimeException("Unexpected!")
+      case None => null
+    }
+
+  }
+
+  it should "find relationships which do match" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    val c = new Container("x", _registry = rr)
+    val t1 = new Thing("Thing 1")
+    val t2 = new Thing("Thing 2")
+    rr.createRelationshipPairs("Above", "Below")
+    c.relate(t1, t2, "Above")
+
+    val result: Option[Relationship] = c.find(t1, t2, "Above")
+
+    val foo = result match {
+      case Some(_: Relationship) => null
+      case None => throw new RuntimeException("Unexpected!")
+    }
+
+  }
+
   it should "not contain the world" in {
     val w = new World("The World")
     val c = new Container("x", null)
-
-
   }
+
+  //  it should "be able to list relationships from a single object's perspective" in {
+  //    val rr = new RelationshipTypeRegistry("xxx")
+  //    val c = new Container("x", _registry = rr)
+  //    val t1 = new Thing("Thing 1")
+  //    val t2 = new Thing("Thing 2")
+  //    val t3 = new Thing("Thing 3")
+  //    rr.createRelationshipPairs("Above", "Below")
+  //
+  //    val r0 = c.relate(t1, t2, "Above") // t1 is above t2
+  //    val r1 = c.relate(t2, t3, "Above") // t2 is above t3
+  //
+  //    c.relationships.toList should have length 3
+  //    c.getRelationships(t2).toList should have length 2
+  //
+  //  }
 
 }

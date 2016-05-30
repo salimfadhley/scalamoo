@@ -25,14 +25,42 @@ class RelationshipSpec extends FlatSpec with Matchers {
     }
   }
 
-  it should "contain both a reltionship and its inverse" in {
+  it should "contain both a relationship and its inverse" in {
     val rr = new RelationshipTypeRegistry("xxx")
     rr.createRelationshipPairs("Above", "Below")
     val t1 = new Thing("t1")
     val t2 = new Thing("t2")
     val c = new Container("xx", rr)
     val r0: Relationship = c.relate(t1, t2, "Above")
-    c.hasRelationship(t1, t2, "Below") should be(true)
+    c.hasRelationship(t1, t2, "Above") should be(true)
+    c.hasRelationship(t2, t1, "Below") should be(true)
+  }
+
+  it should "be able to reframe a relationship from either object it relates" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    rr.createRelationshipPairs("Above", "Below")
+    val t1 = new Thing("t1")
+    val t2 = new Thing("t2")
+    val c = new Container("xx", rr)
+    val r0: Relationship = c.relate(t1, t2, "Above")
+
+    r0.inverse.fromPerspective(t1) should equal(r0)
+    r0.fromPerspective(t2) should equal(r0.inverse)
+
+  }
+
+  it should "know if it relates to objects" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    rr.createRelationshipPairs("Above", "Below")
+    val t1 = new Thing("t1")
+    val t2 = new Thing("t2")
+    val t3 = new Thing("t3")
+    val c = new Container("xx", rr)
+    val r0: Relationship = c.relate(t1, t2, "Above")
+
+    r0.relatesTo(t1) should be(true)
+    r0.relatesTo(t2) should be(true)
+    r0.relatesTo(t3) should be(false)
   }
 
   it should "relationships are always similar identically defined relationships" in {
@@ -46,6 +74,23 @@ class RelationshipSpec extends FlatSpec with Matchers {
     r0.similar(t1, t2, "Above") should be(true)
     r0.similar(t2, t1, "Below") should be(true)
   }
+
+  it should "never be similar to relationships involving different objects" in {
+    val rr = new RelationshipTypeRegistry("xxx")
+    rr.createRelationshipPairs("Above", "Below")
+    val t1 = new Thing("t1")
+    val t2 = new Thing("t2")
+    val t3 = new Thing("t3")
+    val c = new Container("xx", rr)
+    val r0: Relationship = c.relate(t1, t2, "Above")
+
+    withClue("similar: ") {
+      r0.similar(t1, t3, "Above") should be(false)
+      r0.similar(t3, t1, "Below") should be(false)
+    }
+  }
+
+
 
   it should "be similar identically defined relationships expressed as objects" in {
     val rr = new RelationshipTypeRegistry("xxx")

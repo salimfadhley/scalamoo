@@ -16,7 +16,6 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
     val a:Thing = new Thing("Thing 1")
     val b:Thing = new Thing("Thing 2")
     val rel:Relationship = foo.newRelationship(a,b)
-
     assert(rel.inverse.b === a)
     assert(rel.inverse.a === b)
   }

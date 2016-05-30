@@ -27,4 +27,29 @@ class ThingSpec extends FlatSpec with Matchers {
     }
   }
 
+  it should "not be equal to other things" in {
+    new Thing("A") should not equal new Thing("B")
+  }
+
+  it should "be storable in a hashset as a unique item" in {
+    val a: Thing = new Thing("A")
+    val b: Thing = new Thing("B")
+
+    val hs = new scala.collection.mutable.HashSet[Thing]()
+
+    assert(!hs.contains(a))
+    assert(!hs.contains(b))
+
+    hs.add(a)
+
+    assert(hs.contains(a))
+    assert(!hs.contains(b))
+
+    hs.add(b)
+
+    assert(hs.contains(a))
+    assert(hs.contains(b))
+
+  }
+
 }

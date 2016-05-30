@@ -9,13 +9,16 @@ import scala.collection.mutable
   */
 class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thing(_name) {
 
-
   val relationships: mutable.Set[Relationship] = new mutable.HashSet[Relationship]()
   val registry: RelationshipTypeRegistry = _registry
   private val contents: mutable.Map[Int, Thing] = new mutable.HashMap[Int, Thing]()
 
   def getRelationships(t1: Thing, t2: Thing): Set[Relationship] = {
-    relationships.filter((r: Relationship) => true).toSet
+    relationships.filter(_.relatesTo(t1)).filter(_.relatesTo(t2)).toSet
+  }
+
+  def getRelationships(t: Thing) = {
+    relationships.filter(_.relatesTo(t)).map(_.fromPerspective(t))
   }
 
   def contains(t: Thing):Boolean = {
@@ -39,10 +42,11 @@ class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thin
     relationships.find(r => r.similar(t1, t2, s))
   }
 
-  def add(thing: Thing): Unit = {
+  def add[T <: Thing](thing: T): Thing = {
     if (canContain(thing)) {
       contents.put(thing.sn, thing)
     }
+    thing
   }
 
   def canContain(thing: Thing): Boolean = {

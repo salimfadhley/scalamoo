@@ -24,7 +24,14 @@ class WorldSpec extends FlatSpec with Matchers {
     w.registry.createRelationshipPairs("North", "South")
     val l0: Location = w.newLocation("The First Room")
     val l1: Location = w.newLocation("The second Room")
-    w.relate(l0, l1, "North")
+    w.relate(l0, l1, "North") // means l0 is north of l1
+
+    //    l0.exits should have length 1
+    //    l1.exits should have length 1
+
+    //    l0.exits should contain ((l1, w.registry.getByName("South")))
+    //    l1.exits should contain ((l1, w.registry.getByName("South")))
+
   }
 
 }

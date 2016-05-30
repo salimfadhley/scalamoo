@@ -7,9 +7,9 @@ import relationships.{Container, RelationshipTypeRegistry}
   */
 class World(name: String) extends Container(name, new RelationshipTypeRegistry("Default")) {
 
-
   def newLocation(name: String): Location = {
-    new Location(name, registry, this)
+    val l = new Location(_name = name, _world = this)
+    add(l).asInstanceOf[Location]
   }
 
 }

@@ -8,7 +8,8 @@ import org.scalatest.{FlatSpec, Matchers}
 class LocationSpec extends FlatSpec with Matchers {
 
   "Location" should "be namable" in {
-    val l = new Location("The First Room", null, null)
+    val w = new World("Ooo")
+    val l = new Location("The First Room", w)
   }
 
 }
