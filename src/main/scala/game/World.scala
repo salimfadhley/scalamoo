@@ -6,6 +6,7 @@ import relationships.{Container, RelationshipTypeRegistry}
   * Created by sal on 28/05/16.
   */
 class World(name: String) extends Container(name, new RelationshipTypeRegistry("Default")) {
+
   var defaultLocationId: Option[Int] = None
 
 
@@ -14,10 +15,15 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
     add(l).asInstanceOf[Location]
 
     defaultLocationId match {
-      case None => defaultLocationId = Some(l.sn)
+      case None => setDefaulLocation(l)
       case Some(x: Int) =>
     }
     l
+  }
+
+  def setDefaulLocation(location: Location): Location = {
+    defaultLocationId = Some(location.sn)
+    location
   }
 
   def defaultLocation: Option[Location] = {

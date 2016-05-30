@@ -29,11 +29,11 @@ class WorldSpec extends FlatSpec with Matchers {
     l0.exits.toList should have length 1
     l1.exits.toList should have length 1
 
-    l0.exits.toList(0).direction should be(w.registry.getByName("South"))
-    l0.exits.toList(0).to should be(l1)
+    l0.exits.head.direction should be(w.registry.getByName("South"))
+    l0.exits.head.to should be(l1)
 
-    l1.exits.toList(0).direction should be(w.registry.getByName("North"))
-    l1.exits.toList(0).to should be(l0)
+    l1.exits.head.direction should be(w.registry.getByName("North"))
+    l1.exits.head.to should be(l0)
   }
 
   it can "have a default location" in {
@@ -43,7 +43,16 @@ class WorldSpec extends FlatSpec with Matchers {
     w.add(l0)
     w.add(l1)
     w.defaultLocation shouldEqual Some(l0)
+  }
 
+  it can "have a default location changed" in {
+    val w = new World("The Earth")
+    val l0: Location = w.newLocation("The First Room")
+    val l1: Location = w.newLocation("The Second Room")
+    w.add(l0)
+    w.add(l1)
+    w.setDefaulLocation(l1)
+    w.defaultLocation shouldEqual Some(l1)
   }
 
 
