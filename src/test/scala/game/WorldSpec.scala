@@ -26,11 +26,15 @@ class WorldSpec extends FlatSpec with Matchers {
     val l1: Location = w.newLocation("The second Room")
     w.relate(l0, l1, "North") // means l0 is north of l1
 
-    //    l0.exits should have length 1
-    //    l1.exits should have length 1
+    l0.exits.toList should have length 1
+    l1.exits.toList should have length 1
 
-    //    l0.exits should contain ((l1, w.registry.getByName("South")))
-    //    l1.exits should contain ((l1, w.registry.getByName("South")))
+    l0.exits.toList(0).direction should be(w.registry.getByName("South"))
+    l0.exits.toList(0).to should be(l1)
+
+    l1.exits.toList(0).direction should be(w.registry.getByName("North"))
+    l1.exits.toList(0).to should be(l0)
+
 
   }
 
