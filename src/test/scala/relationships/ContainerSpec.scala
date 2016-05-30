@@ -169,7 +169,7 @@ class ContainerSpec extends FlatSpec with Matchers {
     c.getRelationships(t2).toList should have length 2
     c.getRelationships(t1).toList should have length 1
     c.getRelationships(t3).toList should have length 1
-
+    c.getRelationships(t2).forall(_.a == t2)
   }
 
 }
