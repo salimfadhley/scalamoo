@@ -40,6 +40,8 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
     }
   }
 
-  def players:Set[Player] = Set(null)
+  def players:Iterator[Player] = {
+    contents.valuesIterator.map(_.asInstanceOf[Location].players).flatten
+  }
 
 }

@@ -11,7 +11,7 @@ class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thin
 
   val relationships: mutable.Set[Relationship] = new mutable.HashSet[Relationship]()
   val registry: RelationshipTypeRegistry = _registry
-  private val contents: mutable.Map[Int, Thing] = new mutable.HashMap[Int, Thing]()
+  protected val contents: mutable.Map[Int, Thing] = new mutable.HashMap[Int, Thing]()
 
   def getRelationships(t1: Thing, t2: Thing): Set[Relationship] = {
     relationships.filter(_.relatesTo(t1)).filter(_.relatesTo(t2)).toSet

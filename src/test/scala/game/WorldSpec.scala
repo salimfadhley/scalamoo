@@ -72,6 +72,7 @@ class WorldSpec extends FlatSpec with Matchers {
 
     withClue("World players") {
       w.players should have size 1
+      assert(w.players.toSet.contains(p0))
     }
   }
 
