@@ -55,5 +55,25 @@ class WorldSpec extends FlatSpec with Matchers {
     w.defaultLocation shouldEqual Some(l1)
   }
 
+  it can "new players are added to the default location" in {
+    val w = new World("The Earth")
+    val l0: Location = w.newLocation("The First Room")
+    val l1: Location = w.newLocation("The Second Room")
+    val p0: Player = new Player("Hank")
+    w.add(l0)
+    w.add(l1)
+    w.setDefaulLocation(l1)
+    w.addPlayer(p0)
+
+    withClue("Location players") {
+      l0.players should have size 0
+      l1.players should have size 1
+    }
+
+    withClue("World players") {
+      w.players should have size 1
+    }
+  }
+
 
 }

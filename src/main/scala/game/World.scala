@@ -7,8 +7,8 @@ import relationships.{Container, RelationshipTypeRegistry}
   */
 class World(name: String) extends Container(name, new RelationshipTypeRegistry("Default")) {
 
-  var defaultLocationId: Option[Int] = None
 
+  var defaultLocationId: Option[Int] = None
 
   def newLocation(name: String): Location = {
     val l = new Location(_name = name, _world = this)
@@ -32,4 +32,14 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
       case Some(x: Int) => this.getById(x).asInstanceOf[Option[Location]]
     }
   }
+
+  def addPlayer(player: Player): Player = {
+    defaultLocation match {
+      case None => throw new RuntimeException("Default location has not been defined")
+      case Some(l:Location) => l.addPlayer(player)
+    }
+  }
+
+  def players:Set[Player] = Set(null)
+
 }
