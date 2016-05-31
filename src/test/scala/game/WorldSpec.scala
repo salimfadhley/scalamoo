@@ -76,5 +76,15 @@ class WorldSpec extends FlatSpec with Matchers {
     }
   }
 
+  it can "throw an error when users are added to the world without locations" in {
+    val w = new World("The Earth")
+    val p0: Player = new Player("Hank")
+
+    intercept[CannotAddPlayer] {
+      w.addPlayer(p0)
+    }
+
+  }
+
 
 }

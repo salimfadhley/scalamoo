@@ -35,7 +35,7 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
 
   def addPlayer(player: Player): Player = {
     defaultLocation match {
-      case None => throw new RuntimeException("Default location has not been defined")
+      case None => throw new CannotAddPlayer("Default location has not been defined")
       case Some(l:Location) => l.addPlayer(player)
     }
   }
