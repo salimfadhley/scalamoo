@@ -86,7 +86,19 @@ class WorldSpec extends FlatSpec with Matchers {
     withClue("Location players") {
       l0.players should have size 1
     }
+
     val pp:Player = w.takePlayer(p0.sn, l0.sn)
+
+    withClue("takePlayer should return the original player object") {
+      pp should be(p0)
+    }
+
+    withClue("takePlayer should clear the location reference in the player object") {
+      pp.location should be(None)
+    }
+
+
+
   }
 
   it can "throw an exception when we attempt to remove a player from a location that does not exist" in {

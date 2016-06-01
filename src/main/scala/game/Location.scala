@@ -1,6 +1,7 @@
 package game
 
 import relationships.{Container, Relationship}
+
 import scala.collection.mutable
 
 /**
@@ -26,10 +27,12 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
   }
 
   def takePlayer(playerSn: Int): Player = {
-    players.remove(playerSn) match {
+    val p: Player = players.remove(playerSn) match {
       case Some(p:Player) => p
       case None => throw new NoSuchPlayer(s"No player has id $playerSn")
     }
+    p.clearLocation
+    p
   }
 
   def contains(p:Player):Boolean = {
