@@ -1,6 +1,7 @@
 package game
 
-import relationships.{Container, RelationshipTypeRegistry}
+
+import relationships.{Container, RelationshipTypeRegistry, Thing}
 
 /**
   * Created by sal on 28/05/16.
@@ -27,10 +28,20 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
     location
   }
 
-  def defaultLocation: Option[Location] = {
-    defaultLocationId match {
-      case None => None
-      case Some(x: Int) => this.getById(x).asInstanceOf[Option[Location]]
+  def takePlayer(playerSn: Int, locationSn: Int): Player = {
+    getById(locationSn).asInstanceOf[Option[Location]] match {
+      case Some(l: Location) => l.takePlayer(playerSn)
+      case _ => throw new NoSuchLocation(s"No location has id ${locationSn}")
+    }
+  }
+
+  def movePlayer(playerSn: Int, newLocationSn: Int): Player = {
+    val l: Location = playersIdToLocations.get(playerSn) match {
+      case Some(l: Location) => l
+      case None => throw new RuntimeException("REPLACE ME!!!!")
+    }
+    getById(newLocationSn) match {
+      case Some(l: Location) => addPlayer(l.takePlayer(playerSn))
     }
   }
 
@@ -41,11 +52,23 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
     }
   }
 
-  def takePlayer(playerSn: Int, locationSn: Int): Player = {
-    getById(locationSn).asInstanceOf[Option[Location]] match {
-      case Some(l:Location) => l.takePlayer(playerSn)
-      case _ => throw new NoSuchLocation(s"No location has id ${locationSn}")
+  def defaultLocation: Option[Location] = {
+    defaultLocationId match {
+      case None => None
+      case Some(x: Int) => this.getById(x).asInstanceOf[Option[Location]]
     }
+  }
+
+  def playersIdToLocations: Map[Int, Location] = {
+    // Map player IDs to their locations
+    contents.valuesIterator
+      .map((l: Thing) => l.asInstanceOf[Location].players.valuesIterator)
+      .flatten
+      .map((p: Player) => (p.sn, p.location match {
+        case Some(l: Location) => l
+        case _ => throw new RuntimeException("Found a player in a location with no reference back to the location!")
+      }))
+      .toMap
   }
 
   def players:Iterator[Player] = {
