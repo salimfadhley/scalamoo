@@ -9,7 +9,7 @@ import scala.collection.mutable
 class Location(_name: String, _world: World) extends Container(_name, _registry = _world.registry) {
 
   val world: World = _world
-  val players:mutable.Set[Player] = new mutable.HashSet[Player]()
+  val players:mutable.HashMap[Int,Player] = new mutable.HashMap[Int,Player]()
 
   def in(w: World): Boolean = w.contains(this)
 
@@ -20,13 +20,20 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
   }
 
   def addPlayer(p: Player): Player = {
-    players.add(p)
+    players.put(p.sn, p)
     p.setLocation(this)
     p
   }
 
+  def takePlayer(playerSn: Int): Player = {
+    players.remove(playerSn) match {
+      case Some(p:Player) => p
+      case None => throw new NoSuchPlayer(s"No player has id $playerSn")
+    }
+  }
+
   def contains(p:Player):Boolean = {
-    players.contains(p)
+    players.keySet.contains(p.sn)
   }
 
 }

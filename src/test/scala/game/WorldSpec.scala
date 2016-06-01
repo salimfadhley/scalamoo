@@ -76,6 +76,41 @@ class WorldSpec extends FlatSpec with Matchers {
     }
   }
 
+  it can "players can be removed from locations" in {
+    val w = new World("The Earth")
+    val l0: Location = w.newLocation("The First Room")
+    val p0: Player = new Player("JimBob")
+    w.add(l0)
+    w.addPlayer(p0)
+
+    withClue("Location players") {
+      l0.players should have size 1
+    }
+    val pp:Player = w.takePlayer(p0.sn, l0.sn)
+  }
+
+  it can "throw an exception when we attempt to remove a player from a location that does not exist" in {
+    val w = new World("The Earth")
+    val l0: Location = w.newLocation("The First Room")
+    val p0: Player = new Player("JimBob")
+    w.add(l0)
+    w.addPlayer(p0)
+    intercept[NoSuchPlayer] {
+      val pp: Player = w.takePlayer(p0.sn+ 999, l0.sn )
+    }
+  }
+
+  it can "throw an exception when we attempt to remove a player that does not exist from a location" in {
+    val w = new World("The Earth")
+    val l0: Location = w.newLocation("The First Room")
+    val p0: Player = new Player("JimBob")
+    w.add(l0)
+    w.addPlayer(p0)
+    intercept[NoSuchLocation] {
+      val pp: Player = w.takePlayer(p0.sn, l0.sn + 999)
+    }
+  }
+
   it can "throw an error when users are added to the world without locations" in {
     val w = new World("The Earth")
     val p0: Player = new Player("Hank")

@@ -8,6 +8,7 @@ import relationships.{Container, RelationshipTypeRegistry}
 class World(name: String) extends Container(name, new RelationshipTypeRegistry("Default")) {
 
 
+
   var defaultLocationId: Option[Int] = None
 
   def newLocation(name: String): Location = {
@@ -40,8 +41,15 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
     }
   }
 
+  def takePlayer(playerSn: Int, locationSn: Int): Player = {
+    getById(locationSn).asInstanceOf[Option[Location]] match {
+      case Some(l:Location) => l.takePlayer(playerSn)
+      case _ => throw new NoSuchLocation(s"No location has id ${locationSn}")
+    }
+  }
+
   def players:Iterator[Player] = {
-    contents.valuesIterator.map(_.asInstanceOf[Location].players).flatten
+    contents.valuesIterator.map(_.asInstanceOf[Location].players.valuesIterator).flatten
   }
 
 }
