@@ -1,6 +1,5 @@
 package relationships
 
-
 class CannotContain(message: String) extends RuntimeException(message)
 
 import scala.collection.mutable
@@ -8,9 +7,6 @@ import scala.collection.mutable
   * Created by sal on 24/05/16.
   */
 class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thing(_name) {
-
-
-
   val relationships: mutable.Set[Relationship] = new mutable.HashSet[Relationship]()
   val registry: RelationshipTypeRegistry = _registry
   protected val contents: mutable.Map[Int, Thing] = new mutable.HashMap[Int, Thing]()
@@ -66,8 +62,6 @@ class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thin
   def hasRelationship(t1: Thing, t2: Thing, s: String): Boolean = {
     relationships.exists((r: Relationship) => r.similar(t1, t2, s))
   }
-
-
 
 
 }
