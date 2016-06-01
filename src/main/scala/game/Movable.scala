@@ -9,4 +9,15 @@ trait Movable {
   def setLocation(l: Location) = {
     location = Some(l)
   }
+
+//  def move(s: String) = {
+//
+//    location match {
+//      case Some(l:Location) => {
+//        val newLocatiin:Location = l.getRelated(s)
+//      }
+//    }
+//
+//  }
+
 }

@@ -25,4 +25,8 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
     p
   }
 
+  def contains(p:Player):Boolean = {
+    players.contains(p)
+  }
+
 }

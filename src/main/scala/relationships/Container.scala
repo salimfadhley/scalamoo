@@ -9,6 +9,8 @@ import scala.collection.mutable
   */
 class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thing(_name) {
 
+
+
   val relationships: mutable.Set[Relationship] = new mutable.HashSet[Relationship]()
   val registry: RelationshipTypeRegistry = _registry
   protected val contents: mutable.Map[Int, Thing] = new mutable.HashMap[Int, Thing]()
@@ -17,8 +19,12 @@ class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thin
     relationships.filter(_.relatesTo(t1)).filter(_.relatesTo(t2)).toSet
   }
 
-  def getRelationships(t: Thing) = {
-    relationships.filter(_.relatesTo(t)).map(_.fromPerspective(t))
+  def getRelationships(t: Thing):Iterator[Relationship] = {
+    relationships.filter(_.relatesTo(t)).map(_.fromPerspective(t)).iterator
+  }
+
+  def getRelated(t: Thing, rn: String): Iterator[Thing] = {
+    getRelationships(t).toList.filter(_.relationshipType.inverse.name==rn).map(_.b).iterator
   }
 
   def getById(x: Int): Option[Thing] = {
@@ -60,5 +66,8 @@ class Container(_name: String, _registry: RelationshipTypeRegistry) extends Thin
   def hasRelationship(t1: Thing, t2: Thing, s: String): Boolean = {
     relationships.exists((r: Relationship) => r.similar(t1, t2, s))
   }
+
+
+
 
 }
