@@ -35,13 +35,10 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
     }
   }
 
-  def movePlayer(playerSn: Int, newLocationSn: Int): Player = {
-    val l: Location = playersIdToLocations.get(playerSn) match {
-      case Some(l: Location) => l
-      case None => throw new RuntimeException("REPLACE ME!!!!")
-    }
-    getById(newLocationSn) match {
-      case Some(l: Location) => addPlayer(l.takePlayer(playerSn))
+  def movePlayer(player: Player, newLocation: Location): Player = {
+    player.location match {
+      case Some(l:Location) => newLocation.addPlayer(l.takePlayer(player.sn))
+      case _ => newLocation.addPlayer(player)
     }
   }
 

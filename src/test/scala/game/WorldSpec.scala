@@ -100,8 +100,9 @@ class WorldSpec extends FlatSpec with Matchers {
       case Some(l: Location) =>
       case _ => fail("Original location was wrong")
     }
-    val pp: Player = w.movePlayer(p0.sn, l1.sn)
-    //      p0.location should be(l1)
+    val pp: Player = w.movePlayer(p0, l1)
+
+    p0.location should be(Some(l1))
     }
 
 
