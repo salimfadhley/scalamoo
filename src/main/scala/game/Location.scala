@@ -1,6 +1,6 @@
 package game
 
-import relationships.{Container, Relationship}
+import relationships.{Container, Relationship, Thing}
 
 import scala.collection.mutable
 
@@ -37,6 +37,10 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
 
   def contains(p:Player):Boolean = {
     players.keySet.contains(p.sn)
+  }
+
+  def getRelated(l:Location, rn: String): Iterator[Location] = {
+    super.getRelated(l.asInstanceOf[Thing], rn).asInstanceOf[Iterator[Location]]
   }
 
 }

@@ -15,7 +15,7 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
 
   def newLocation(name: String): Location = {
     val l = new Location(_name = name, _world = this)
-    add(l).asInstanceOf[Location]
+    add(l)
 
     defaultLocationId match {
       case None => setDefaulLocation(l)
@@ -73,4 +73,18 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
     contents.valuesIterator.map(_.asInstanceOf[Location].players.valuesIterator).flatten
   }
 
+  def getRelated(l: Location, rn: String): Iterator[Location] = {
+    super.getRelated(l.asInstanceOf[Thing], rn).asInstanceOf[Iterator[Location]]
+  }
+}
+
+object World {
+  def bootstrap(name:String):World = {
+    val w = new World(name)
+
+    w.registry.createRelationshipPairs("North", "South")
+    w.registry.createRelationshipPairs("East", "West")
+
+    w
+  }
 }
