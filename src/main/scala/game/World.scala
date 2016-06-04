@@ -7,10 +7,11 @@ import relationships.{Container, RelationshipTypeRegistry, Thing}
   * Created by sal on 28/05/16.
   */
 class World(name: String) extends Container(name, new RelationshipTypeRegistry("Default")) {
-
-
-
   var defaultLocationId: Option[Int] = None
+
+  def add(l:Location):Location = {
+    super.add(l).asInstanceOf[Location]
+  }
 
   def newLocation(name: String): Location = {
     val l = new Location(_name = name, _world = this)

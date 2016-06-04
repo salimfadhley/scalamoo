@@ -12,7 +12,6 @@ trait Movable {
 
   def clearLocation: Unit = {
     location = None
-    this
   }
 
 }

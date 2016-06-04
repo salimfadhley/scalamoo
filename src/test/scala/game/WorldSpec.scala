@@ -103,6 +103,7 @@ class WorldSpec extends FlatSpec with Matchers {
     val pp: Player = w.movePlayer(p0, l1)
 
     p0.location should be(Some(l1))
+    l1.players.valuesIterator.toSet should contain(p0)
     }
 
 
@@ -154,11 +155,6 @@ class WorldSpec extends FlatSpec with Matchers {
 
     l0.contains(p0) should be(true)
     l1.contains(p0) should be(false)
-
-//    p0.move("North")
-//
-//    l0.contains(p0) should be(false)
-//    l1.contains(p0) should be(true)
   }
 
 
