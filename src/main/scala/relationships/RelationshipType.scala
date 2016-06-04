@@ -5,7 +5,7 @@ package relationships
   */
 
 class RelationshipType(_name: String, _inverse: => RelationshipType, _registry: RelationshipTypeRegistry) {
-  lazy val inverse:RelationshipType = _inverse
+  lazy val inverse: RelationshipType = _inverse
   val name: String = _name
   val registry: RelationshipTypeRegistry = _registry
 

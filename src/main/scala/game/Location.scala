@@ -10,7 +10,7 @@ import scala.collection.mutable
 class Location(_name: String, _world: World) extends Container(_name, _registry = _world.registry) {
 
   val world: World = _world
-  val players:mutable.HashMap[Int,Player] = new mutable.HashMap[Int,Player]()
+  val players: mutable.HashMap[Int, Player] = new mutable.HashMap[Int, Player]()
 
   def in(w: World): Boolean = w.contains(this)
 
@@ -28,25 +28,25 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
 
   def takePlayer(playerSn: Int): Player = {
     val p: Player = players.remove(playerSn) match {
-      case Some(p:Player) => p
+      case Some(p: Player) => p
       case None => throw new NoSuchPlayer(s"No player has id $playerSn")
     }
-    p.clearLocation
+    p.clearLocation()
     p
   }
 
-  def contains(p:Player):Boolean = {
+  def contains(p: Player): Boolean = {
     players.keySet.contains(p.sn)
   }
 
-  def getRelated(l:Location, rn: String): Iterator[Location] = {
+  def getRelated(l: Location, rn: String): Iterator[Location] = {
     super.getRelated(l.asInstanceOf[Thing], rn).asInstanceOf[Iterator[Location]]
   }
 
 }
 
 object Location {
-  def locationFactory(w:World, locationNames: List[String]): List[Location] = {
-    locationNames.map(ln=>w.add(new Location(ln, w)))
+  def locationFactory(w: World, locationNames: List[String]): List[Location] = {
+    locationNames.map(ln => w.add(new Location(ln, w)))
   }
 }

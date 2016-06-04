@@ -9,12 +9,7 @@ import relationships.{Container, RelationshipTypeRegistry, Thing}
 class World(name: String) extends Container(name, new RelationshipTypeRegistry("Default")) {
 
 
-
   var defaultLocationId: Option[Int] = None
-
-  def add(l:Location):Location = {
-    super.add(l).asInstanceOf[Location]
-  }
 
   def newLocation(name: String): Location = {
     val l = new Location(_name = name, _world = this)
@@ -27,6 +22,10 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
     l
   }
 
+  def add(l: Location): Location = {
+    super.add(l).asInstanceOf[Location]
+  }
+
   def setDefaulLocation(location: Location): Location = {
     defaultLocationId = Some(location.sn)
     location
@@ -35,35 +34,37 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
   def takePlayer(playerSn: Int, locationSn: Int): Player = {
     getById(locationSn).asInstanceOf[Option[Location]] match {
       case Some(l: Location) => l.takePlayer(playerSn)
-      case _ => throw new NoSuchLocation(s"No location has id ${locationSn}")
+      case _ => throw new NoSuchLocation(s"No location has id $locationSn")
+    }
+  }
+
+  def movePlayer(player: Player, direction: String): Unit = {
+    player.location match {
+      case None => throw new NoSuchLocation(s"Player does not yet have a location")
+      case Some(l: Location) =>
+        val relatedLocations: List[Location] = getRelated(l, direction).toList
+        relatedLocations match {
+          case nl :: rest => movePlayer(player, nl)
+          case Nil => throw new NoSuchDirection(direction)
+        }
     }
   }
 
   def movePlayer(player: Player, newLocation: Location): Player = {
     player.location match {
-      case Some(l:Location) => newLocation.addPlayer(l.takePlayer(player.sn))
+      case Some(l: Location) => newLocation.addPlayer(l.takePlayer(player.sn))
       case _ => newLocation.addPlayer(player)
     }
   }
 
-  def movePlayer(player: Player, direction: String):Unit = {
-    player.location match {
-      case None=> throw new NoSuchLocation(s"Player does not yet have a location")
-      case Some(l:Location) => {
-        val relatedLocations:List[Location] = getRelated(l, direction).toList
-        relatedLocations match {
-          case nl :: rest => movePlayer(player, nl)
-          case Nil => throw new RuntimeException("XXXXXXXXXXX REDEFINE THIS")
-        }
-      }
-    }
+  def getRelated(l: Location, rn: String): Iterator[Location] = {
+    super.getRelated(l.asInstanceOf[Thing], rn).asInstanceOf[Iterator[Location]]
   }
-
 
   def addPlayer(player: Player): Player = {
     defaultLocation match {
       case None => throw new CannotAddPlayer("Default location has not been defined")
-      case Some(l:Location) => l.addPlayer(player)
+      case Some(l: Location) => l.addPlayer(player)
     }
   }
 
@@ -86,17 +87,13 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
       .toMap
   }
 
-  def players:Iterator[Player] = {
+  def players: Iterator[Player] = {
     contents.valuesIterator.map(_.asInstanceOf[Location].players.valuesIterator).flatten
-  }
-
-  def getRelated(l: Location, rn: String): Iterator[Location] = {
-    super.getRelated(l.asInstanceOf[Thing], rn).asInstanceOf[Iterator[Location]]
   }
 }
 
 object World {
-  def bootstrap(name:String):World = {
+  def bootstrap(name: String): World = {
     val w = new World(name)
 
     w.registry.createRelationshipPairs("North", "South")

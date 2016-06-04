@@ -8,5 +8,4 @@ import relationships.Thing
 class Player(_name: String) extends Thing(_name) with Movable {
 
 
-
 }

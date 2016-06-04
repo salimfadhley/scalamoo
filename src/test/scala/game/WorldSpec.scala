@@ -120,30 +120,27 @@ class WorldSpec extends FlatSpec with Matchers {
     val p:Player = w.addPlayer(new Player("JimBob"))
 
     w.movePlayer(p, "South")
-    p.location shouldBe(Some(l1))
+    p.location shouldBe Some(l1)
 
     w.movePlayer(p, "West")
-    p.location shouldBe(Some(l2))
+    p.location shouldBe Some(l2)
 
     w.movePlayer(p, "South")
-    p.location shouldBe(Some(l3))
+    p.location shouldBe Some(l3)
   }
 
   it can "it throws a NoSuchDirection error if we try to move to a non-existent direction" in {
     val w = World.bootstrap("The Earth")
     val l0: Location = w.newLocation("The First Room")
-    val l1: Location = w.newLocation("The Second Room")
-    val l2: Location = w.newLocation("The Second Room")
-    val l3: Location = w.newLocation("The Third Room")
 
-    w.relate(l0, l1, "North") // l0 is North of l1
-    w.relate(l1, l2, "East") // l1 is east of L2
-    w.relate(l3, l2, "South") // L3 is south of L2
+    val p: Player = w.addPlayer(new Player("JimBob"))
 
-    val p:Player = w.addPlayer(new Player("JimBob"))
+    intercept[NoSuchDirection] {
+      w.movePlayer(p, "South")
+    }
 
-    w.movePlayer(p, "South")
-    p.location shouldBe(Some(l1))
+    p.location shouldBe Some(l0)
+  }
 
   it can "throw an exception when we attempt to remove a player from a location that does not exist" in {
     val w = new World("The Earth")
