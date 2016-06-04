@@ -7,6 +7,9 @@ import relationships.{Container, RelationshipTypeRegistry, Thing}
   * Created by sal on 28/05/16.
   */
 class World(name: String) extends Container(name, new RelationshipTypeRegistry("Default")) {
+
+
+
   var defaultLocationId: Option[Int] = None
 
   def add(l:Location):Location = {
@@ -42,6 +45,20 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
       case _ => newLocation.addPlayer(player)
     }
   }
+
+  def movePlayer(player: Player, direction: String):Unit = {
+    player.location match {
+      case None=> throw new NoSuchLocation(s"Player does not yet have a location")
+      case Some(l:Location) => {
+        val relatedLocations:List[Location] = getRelated(l, direction).toList
+        relatedLocations match {
+          case nl :: rest => movePlayer(player, nl)
+          case Nil => throw new RuntimeException("XXXXXXXXXXX REDEFINE THIS")
+        }
+      }
+    }
+  }
+
 
   def addPlayer(player: Player): Player = {
     defaultLocation match {

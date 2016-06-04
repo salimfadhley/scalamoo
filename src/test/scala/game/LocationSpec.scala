@@ -28,14 +28,11 @@ class LocationSpec extends FlatSpec with Matchers {
 
     val result0:List[Location] = w.getRelated(roomA, "South").toList
     assert(result0.contains(roomB))
-    result0 should have length(1)
+    result0 should have length 1
 
     val result1:List[Location] = w.getRelated(roomA, "West").toList
     assert(result1.contains(roomD))
-    result1 should have length(1)
-
-
-
+    result1 should have length 1
   }
 
 }
