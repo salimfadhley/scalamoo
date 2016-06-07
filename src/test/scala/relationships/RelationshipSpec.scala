@@ -1,6 +1,6 @@
 package relationships
 
-import game.World
+import game.{Player, World}
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
@@ -153,8 +153,22 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val t2 = new Thing("Desk")
     val l0 = w.newLocation("Happy Place")
     val r0:Visible = l0.relate(t1, t2, "On")
-
     r0.look(0) should be ("The Pen is on the Desk.")
+  }
+
+  it should "describe relationships between owned items" in {
+    val w:World = World.bootstrap("Kitty's palace")
+
+    val p0 = new Player("Anthony")
+    val p1 = new Player("Vlad")
+
+    val t0 = p0.createThing("bucket")
+    val t1 = p1.createThing("matress")
+
+    val l0 = w.newLocation("Happy Place")
+
+    val r0:Visible = l0.relate(t0, t1, "On")
+    r0.look(0) should be ("Anthony's bucket is on Vlad's matress.")
   }
 
 }

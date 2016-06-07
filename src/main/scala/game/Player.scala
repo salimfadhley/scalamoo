@@ -8,4 +8,11 @@ import relationships.Thing
 class Player(_name: String) extends Thing(_name) with Movable {
 
 
+  def createThing(name: String): Thing = {
+    val t = new Thing(name)
+    t.setOwner(this)
+    t
+  }
+
+
 }

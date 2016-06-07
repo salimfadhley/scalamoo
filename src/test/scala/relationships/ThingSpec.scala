@@ -1,5 +1,6 @@
 package relationships
 
+import game.Player
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
@@ -41,15 +42,21 @@ class ThingSpec extends FlatSpec with Matchers {
     v.look(0) should be ("a box")
   }
 
+  it should "be visible with it's owner's name" in {
+    val p = new Player("Jimbob")
+    val t:Thing = p.createThing("elephant")
+    t.owner === p
+
+
+    t.look(0) should be ("Jimbob's elephant")
+  }
+
   it should "be storable in a hashset as a unique item" in {
     val a: Thing = new Thing("A")
     val b: Thing = new Thing("B")
-
     val hs = new scala.collection.mutable.HashSet[Thing]()
-
     assert(!hs.contains(a))
     assert(!hs.contains(b))
-
     hs.add(a)
 
     assert(hs.contains(a))
