@@ -31,6 +31,16 @@ class ThingSpec extends FlatSpec with Matchers {
     new Thing("A") should not equal new Thing("B")
   }
 
+  it should "be visible when starting with a vowell" in {
+    val v:Visible = new Thing("old box")
+    v.look(0) should be ("an old box")
+  }
+
+  it should "be visible" in {
+    val v:Visible = new Thing("box")
+    v.look(0) should be ("a box")
+  }
+
   it should "be storable in a hashset as a unique item" in {
     val a: Thing = new Thing("A")
     val b: Thing = new Thing("B")

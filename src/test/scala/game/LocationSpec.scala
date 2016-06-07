@@ -1,6 +1,7 @@
 package game
 
 import org.scalatest.{FlatSpec, Matchers}
+import relationships.Visible
 
 /**
   * Created by sal on 28/05/16.
@@ -33,6 +34,12 @@ class LocationSpec extends FlatSpec with Matchers {
     val result1:List[Location] = w.getRelated(roomA, "West").toList
     assert(result1.contains(roomD))
     result1 should have length 1
+  }
+
+  it should "be visible"  in {
+    val w:World = World.bootstrap("Meh")
+    val l:Visible = w.newLocation("A")
+    l.look(0).shouldEqual("A")
   }
 
 }

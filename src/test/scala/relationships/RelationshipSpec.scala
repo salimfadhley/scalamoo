@@ -1,5 +1,6 @@
 package relationships
 
+import game.World
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
@@ -134,6 +135,26 @@ class RelationshipSpec extends FlatSpec with Matchers {
     r1.similar(r0) should be(false)
     r0.similar(r1.inverse) should be(false)
     r1.similar(r0.inverse) should be(false)
+  }
+
+  it should "be visible" in {
+    val w:World = World.bootstrap("Kitty's palace")
+    val t1 = new Thing("pen")
+    val t2 = new Thing("desk")
+    val l0 = w.newLocation("Happy Place")
+    val r0:Visible = l0.relate(t1, t2, "On")
+
+    r0.look(0) should be ("A pen is on a desk.")
+  }
+
+  it should "describe relationships between unique items" in {
+    val w:World = World.bootstrap("Kitty's palace")
+    val t1 = new Thing("Pen")
+    val t2 = new Thing("Desk")
+    val l0 = w.newLocation("Happy Place")
+    val r0:Visible = l0.relate(t1, t2, "On")
+
+    r0.look(0) should be ("The Pen is on the Desk.")
   }
 
 }

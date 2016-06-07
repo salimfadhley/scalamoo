@@ -1,16 +1,20 @@
 package game
 
-import relationships.{Container, Relationship, Thing}
+import relationships.{Container, Relationship, Thing, Visible}
 
 import scala.collection.mutable
 
 /**
   * Created by sal on 28/05/16.
   */
-class Location(_name: String, _world: World) extends Container(_name, _registry = _world.registry) {
+class Location(_name: String, _world: World) extends Container(_name, _registry = _world.registry) with Visible {
 
   val world: World = _world
   val players: mutable.HashMap[Int, Player] = new mutable.HashMap[Int, Player]()
+
+  override def look(intensity:Int):String = {
+    _name
+  }
 
   def in(w: World): Boolean = w.contains(this)
 

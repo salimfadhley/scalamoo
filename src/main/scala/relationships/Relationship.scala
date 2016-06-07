@@ -3,7 +3,7 @@ package relationships
 /**
   * Created by sal on 24/05/16.
   */
-class Relationship(_a: Thing, _b: Thing, _relationshipType: RelationshipType, _inverse: => Relationship, _canonical: Boolean) {
+class Relationship(_a: Thing, _b: Thing, _relationshipType: RelationshipType, _inverse: => Relationship, _canonical: Boolean) extends Visible {
 
   lazy val inverse: Relationship = _inverse
   val a: Thing = _a
@@ -11,6 +11,14 @@ class Relationship(_a: Thing, _b: Thing, _relationshipType: RelationshipType, _i
   val relationshipType = _relationshipType
   val canonical: Boolean = _canonical
   val sn: Int = Relationship.counter.next
+
+
+  def look(intensity:Int): String = {
+    val aLook:String = a.look(intensity+1)
+    val bLook:String = b.look(intensity+1)
+    TextUtils.capialize(s"$aLook is ${relationshipType.name.toLowerCase} $bLook.")
+
+  }
 
   def similar(r: Relationship): Boolean = {
     similar(r.a, r.b, r.relationshipType.name)

@@ -132,7 +132,6 @@ class WorldSpec extends FlatSpec with Matchers {
   it can "it throws a NoSuchDirection error if we try to move to a non-existent direction" in {
     val w = World.bootstrap("The Earth")
     val l0: Location = w.newLocation("The First Room")
-
     val p: Player = w.addPlayer(new Player("JimBob"))
 
     intercept[NoSuchDirection] {

@@ -95,10 +95,9 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
 object World {
   def bootstrap(name: String): World = {
     val w = new World(name)
-
     w.registry.createRelationshipPairs("North", "South")
     w.registry.createRelationshipPairs("East", "West")
-
+    w.registry.createRelationshipPairs("On", "Under")
     w
   }
 }
