@@ -15,19 +15,12 @@ case class Thing(name: String, prototype: Prototype = null) extends Visible with
   def article:String = {
     val vowels:Set[Char] = "aeiou".toSet
 
-    owner match {
-      case Some(o:Player) => s"${o.name}'s"
-      case _ => {
-        name.head match {
-          case c:Char if vowels.contains(c) => "an"
-          case c:Char if c.isLower => "a"
-          case _ => "the"
-        }
-      }
+    (name.head, owner) match {
+      case (c:Char, _) if c.isUpper => "the"
+      case (_, Some(o)) => s"${o.name}'s"
+      case (c:Char, _) if vowels.contains(c) => "an"
+      case (_,_) => "a"
     }
-
-
-
   }
 }
 
