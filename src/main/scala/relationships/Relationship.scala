@@ -3,7 +3,7 @@ package relationships
 /**
   * Created by sal on 24/05/16.
   */
-class Relationship(_a: Thing, _b: Thing, _relationshipType: RelationshipType, _inverse: => Relationship, _canonical: Boolean) extends Visible {
+class Relationship(_a: Thing, _b: Thing, _relationshipType: RelationshipType, _inverse: => Relationship, _canonical: Boolean) extends Observable {
 
   lazy val inverse: Relationship = _inverse
   val a: Thing = _a
@@ -13,9 +13,9 @@ class Relationship(_a: Thing, _b: Thing, _relationshipType: RelationshipType, _i
   val sn: Int = Relationship.counter.next
 
 
-  def look(intensity:Int): String = {
-    val aLook:String = a.look(intensity+1)
-    val bLook:String = b.look(intensity+1)
+  def observe(intensity:Int): String = {
+    val aLook:String = a.observe(intensity+1)
+    val bLook:String = b.observe(intensity+1)
     TextUtils.capialize(s"$aLook is ${relationshipType.name.toLowerCase} $bLook.")
 
   }

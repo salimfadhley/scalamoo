@@ -5,10 +5,10 @@ import game.Player
 /**
   * Created by sal on 24/05/16.
   */
-case class Thing(name: String, prototype: Prototype = null) extends Visible with Ownable {
+case class Thing(name: String, prototype: Prototype = null) extends Observable with Ownable {
   val sn: Int = Thing.counter.next()
 
-  def look(intensity:Int) = {
+  def observe(intensity:Int) = {
     s"$article $name"
   }
 

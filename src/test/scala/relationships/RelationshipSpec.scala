@@ -142,9 +142,9 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val t1 = new Thing("pen")
     val t2 = new Thing("desk")
     val l0 = w.newLocation("Happy Place")
-    val r0:Visible = l0.relate(t1, t2, "On")
+    val r0:Observable = l0.relate(t1, t2, "On")
 
-    r0.look(0) should be ("A pen is on a desk.")
+    r0.observe(0) should be ("A pen is on a desk.")
   }
 
   it should "describe relationships between unique items" in {
@@ -152,8 +152,8 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val t1 = new Thing("Pen")
     val t2 = new Thing("Desk")
     val l0 = w.newLocation("Happy Place")
-    val r0:Visible = l0.relate(t1, t2, "On")
-    r0.look(0) should be ("The Pen is on the Desk.")
+    val r0:Observable = l0.relate(t1, t2, "On")
+    r0.observe(0) should be ("The Pen is on the Desk.")
   }
 
   it should "describe relationships between owned items" in {
@@ -163,8 +163,8 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val t0 = p0.createThing("bucket")
     val t1 = p1.createThing("matress")
     val l0 = w.newLocation("Happy Place")
-    val r0:Visible = l0.relate(t0, t1, "On")
-    r0.look(0) should be ("Anthony's bucket is on Vlad's matress.")
+    val r0:Observable = l0.relate(t0, t1, "On")
+    r0.observe(0) should be ("Anthony's bucket is on Vlad's matress.")
   }
 
   it should "describe relationships between owned unique items" in {
@@ -174,22 +174,23 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val t0 = p0.createThing("Incal")
     val t1 = p1.createThing("matress")
     val l0 = w.newLocation("Happy Place")
-    val r0:Visible = l0.relate(t0, t1, "On")
-    r0.look(0) should be ("The Incal is on Vlad's matress.")
+    val r0:Observable = l0.relate(t0, t1, "On")
+    r0.observe(0) should be ("The Incal is on Vlad's matress.")
   }
 
-  it should "describe relationships between owned unique items in a location" in {
-    val w:World = World.bootstrap("Kitty's palace")
-    val p0 = new Player("Anthony")
-    val p1 = new Player("Vlad")
-    val t0 = p0.createThing("Incal")
-    val t1 = p1.createThing("matress")
-    val l0 = w.newLocation("bedroom")
-    l0.relate(t0, t1, "On")
-    l0.addPlayer(p0)
+//  it should "describe relationships between owned unique items in a location" in {
+//    val w:World = World.bootstrap("Kitty's palace")
+//    val p0 = new Player("Anthony")
+//    val p1 = new Player("Vlad")
+//    val t0 = p0.createThing("Incal")
+//    val t1 = p1.createThing("matress")
+//    val l0 = w.newLocation("bedroom")
+//    l0.relate(t0, t1, "On")
+//    l0.addPlayer(p0)
+//
+//    p0.look(0) should be ("You are in a Bedroom. The Incal is on Vlad's matress.")
+//    p0.look(1) should be ("You are in a Bedroom.")
+//  }
 
-    p0.look(0) should be ("You are in a Bedroom. The Incal is on Vlad's matress.")
-    p0.look(1) should be ("You are in a Bedroom.")
-  }
 
 }

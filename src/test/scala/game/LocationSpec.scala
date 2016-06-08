@@ -1,7 +1,7 @@
 package game
 
 import org.scalatest.{FlatSpec, Matchers}
-import relationships.Visible
+import relationships.Observable
 
 /**
   * Created by sal on 28/05/16.
@@ -38,8 +38,8 @@ class LocationSpec extends FlatSpec with Matchers {
 
   it should "be visible"  in {
     val w:World = World.bootstrap("Meh")
-    val l:Visible = w.newLocation("A")
-    l.look(0).shouldEqual("A")
+    val l:Observable = w.newLocation("bedroom")
+    l.observe(0).shouldEqual("a bedroom")
   }
 
 }
