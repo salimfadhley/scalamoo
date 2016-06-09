@@ -13,9 +13,9 @@ class Relationship(_a: Thing, _b: Thing, _relationshipType: RelationshipType, _i
   val sn: Int = Relationship.counter.next
 
 
-  def observe(intensity:Int): String = {
-    val aLook:String = a.observe(intensity+1)
-    val bLook:String = b.observe(intensity+1)
+  def observe: String = {
+    val aLook:String = a.observe
+    val bLook:String = b.observe
     TextUtils.capialize(s"$aLook is ${relationshipType.name.toLowerCase} $bLook.")
 
   }

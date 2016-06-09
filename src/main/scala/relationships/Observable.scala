@@ -8,5 +8,5 @@ trait Observable {
     Iterator.empty
   }
 
-  def observe(intensity:Int):String
+  def observe:String
 }

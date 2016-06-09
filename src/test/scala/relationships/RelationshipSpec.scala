@@ -144,7 +144,7 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val l0 = w.newLocation("Happy Place")
     val r0:Observable = l0.relate(t1, t2, "On")
 
-    r0.observe(0) should be ("A pen is on a desk.")
+    r0.observe should be ("A pen is on a desk.")
   }
 
   it should "describe relationships between unique items" in {
@@ -153,7 +153,7 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val t2 = new Thing("Desk")
     val l0 = w.newLocation("Happy Place")
     val r0:Observable = l0.relate(t1, t2, "On")
-    r0.observe(0) should be ("The Pen is on the Desk.")
+    r0.observe should be ("The Pen is on the Desk.")
   }
 
   it should "describe relationships between owned items" in {
@@ -164,7 +164,7 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val t1 = p1.createThing("matress")
     val l0 = w.newLocation("Happy Place")
     val r0:Observable = l0.relate(t0, t1, "On")
-    r0.observe(0) should be ("Anthony's bucket is on Vlad's matress.")
+    r0.observe should be ("Anthony's bucket is on Vlad's matress.")
   }
 
   it should "describe relationships between owned unique items" in {
@@ -175,7 +175,7 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val t1 = p1.createThing("matress")
     val l0 = w.newLocation("Happy Place")
     val r0:Observable = l0.relate(t0, t1, "On")
-    r0.observe(0) should be ("The Incal is on Vlad's matress.")
+    r0.observe should be ("The Incal is on Vlad's matress.")
   }
 
 //  it should "describe relationships between owned unique items in a location" in {

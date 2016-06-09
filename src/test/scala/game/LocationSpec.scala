@@ -39,13 +39,13 @@ class LocationSpec extends FlatSpec with Matchers {
   it should "be able to observe locations"  in {
     val w:World = World.bootstrap("Meh")
     val l:Observable = w.newLocation("bedroom")
-    l.observe(0).shouldEqual("a bedroom")
+    l.observe.shouldEqual("a bedroom")
   }
 
   it should "be able to observe unique locations"  in {
     val w:World = World.bootstrap("Meh")
     val l:Observable = w.newLocation("Throne Room")
-    l.observe(0).shouldEqual("the Throne Room")
+    l.observe.shouldEqual("the Throne Room")
   }
 
   it should "be able to iterate through an empty list of the observable objects" in {
@@ -63,7 +63,7 @@ class LocationSpec extends FlatSpec with Matchers {
     val result:Iterator[Observable] = l.observeContents
 
     val expected = "A sock is on a book."
-    assert(result.map(_.observe(0)).mkString(" ")===expected)
+    assert(result.map(_.observe).mkString(" ")===expected)
 
   }
 

@@ -8,7 +8,7 @@ import game.Player
 case class Thing(name: String, prototype: Prototype = null) extends Observable with Ownable {
   val sn: Int = Thing.counter.next()
 
-  def observe(intensity:Int) = {
+  def observe = {
     s"$article $name"
   }
 

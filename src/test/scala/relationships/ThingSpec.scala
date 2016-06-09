@@ -34,12 +34,12 @@ class ThingSpec extends FlatSpec with Matchers {
 
   it should "be visible when starting with a vowell" in {
     val v:Observable = new Thing("old box")
-    v.observe(0) should be ("an old box")
+    v.observe should be ("an old box")
   }
 
   it should "be visible" in {
     val v:Observable = new Thing("box")
-    v.observe(0) should be ("a box")
+    v.observe should be ("a box")
   }
 
   it should "be visible with it's owner's name" in {
@@ -48,7 +48,7 @@ class ThingSpec extends FlatSpec with Matchers {
     t.owner === p
 
 
-    t.observe(0) should be ("Jimbob's elephant")
+    t.observe should be ("Jimbob's elephant")
   }
 
   it should "be storable in a hashset as a unique item" in {
