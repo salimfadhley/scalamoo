@@ -60,11 +60,25 @@ class LocationSpec extends FlatSpec with Matchers {
     val t0 = new Thing("sock")
     val t1 = new Thing("book")
     l.relate(t0,t1, "On")
-    val result:Iterator[Observable] = l.observeContents
-
+    val result:Iterator[Observable] = l.observeContents()
     val expected = "A sock is on a book."
     assert(result.map(_.observe).mkString(" ")===expected)
+  }
 
+  it should "be able to iterate through all unrelated observable contents" in {
+    val w:World = World.bootstrap("Meh")
+    val l:Location = w.newLocation("bedroom")
+    val t0 = new Thing("sock")
+    val t1 = new Thing("book")
+    val t2 = new Thing("goat")
+
+    l.add(t0)
+    l.add(t1)
+    l.add(t2)
+
+    val result:Iterator[Observable] = l.observeContents()
+    val expected = "a book, a sock"
+    assert(result.map(_.observe).mkString(",")===expected)
   }
 
 }

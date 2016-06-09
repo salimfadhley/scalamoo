@@ -46,8 +46,6 @@ class ThingSpec extends FlatSpec with Matchers {
     val p = new Player("Jimbob")
     val t:Thing = p.createThing("elephant")
     t.owner === p
-
-
     t.observe should be ("Jimbob's elephant")
   }
 
