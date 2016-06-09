@@ -14,6 +14,10 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
 
   def in(w: World): Boolean = w.contains(this)
 
+  override def observeContents():Iterator[Observable] = {
+    relationships.iterator
+  }
+
   def exits: Set[Exit] = {
     _world.getRelationships(this).map(
       (r: Relationship) => new Exit(r.b.asInstanceOf[Location], r.relationshipType.inverse)

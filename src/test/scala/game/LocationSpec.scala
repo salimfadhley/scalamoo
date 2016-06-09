@@ -1,7 +1,7 @@
 package game
 
 import org.scalatest.{FlatSpec, Matchers}
-import relationships.Observable
+import relationships.{Observable, Thing}
 
 /**
   * Created by sal on 28/05/16.
@@ -36,10 +36,35 @@ class LocationSpec extends FlatSpec with Matchers {
     result1 should have length 1
   }
 
-  it should "be visible"  in {
+  it should "be able to observe locations"  in {
     val w:World = World.bootstrap("Meh")
     val l:Observable = w.newLocation("bedroom")
     l.observe(0).shouldEqual("a bedroom")
+  }
+
+  it should "be able to observe unique locations"  in {
+    val w:World = World.bootstrap("Meh")
+    val l:Observable = w.newLocation("Throne Room")
+    l.observe(0).shouldEqual("the Throne Room")
+  }
+
+  it should "be able to iterate through an empty list of the observable objects" in {
+    val w:World = World.bootstrap("Meh")
+    val l:Observable = w.newLocation("bedroom")
+    val result:Iterator[Observable] = l.observeContents
+  }
+
+  it should "be able to iterate through all of the observable objects" in {
+    val w:World = World.bootstrap("Meh")
+    val l:Location = w.newLocation("bedroom")
+    val t0 = new Thing("sock")
+    val t1 = new Thing("book")
+    l.relate(t0,t1, "On")
+    val result:Iterator[Observable] = l.observeContents
+
+    val expected = "A sock is on a book."
+    assert(result.map(_.observe(0)).mkString(" ")===expected)
+
   }
 
 }

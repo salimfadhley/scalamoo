@@ -16,9 +16,8 @@ class Player(_name: String) extends Thing(_name) with Movable with Observer {
   def look(intesity:Int):String = {
   this.location match {
     case None => "You are in a formless void."
-    case Some(l:Location) => s"You are in ${l.observe(0)}."
+    case Some(l:Location) => (s"You are in ${l.observe(0)}. " + l.observeContents().map(_.observe(intesity+1)).mkString(" ")).trim
   }
   }
-
 
 }
