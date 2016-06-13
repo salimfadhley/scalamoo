@@ -4,7 +4,6 @@
 
 # sbt specific
 .cache
-.history
 .lib/
 dist/*
 target/
@@ -30,3 +29,4 @@ src/main/scala-2.11/
 src/test/java/
 src/test/resources/
 src/test/scala-2.11/
+src/main/scala/relationships/Unrelated.scala

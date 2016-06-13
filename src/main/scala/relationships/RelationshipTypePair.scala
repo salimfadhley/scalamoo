@@ -9,6 +9,7 @@ case class RelationshipTypePair(a: RelationshipType, b: RelationshipType) {
 
 }
 
+//noinspection LanguageFeature
 object RelationshipTypePair {
   implicit def asTuple(x: RelationshipTypePair): (RelationshipType, RelationshipType) = (x.a, x.b)
 }

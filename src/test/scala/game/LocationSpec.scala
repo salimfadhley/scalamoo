@@ -60,7 +60,7 @@ class LocationSpec extends FlatSpec with Matchers {
     val t0 = new Thing("sock")
     val t1 = new Thing("book")
     l.relate(t0,t1, "On")
-    val result:Iterator[Observable] = l.observeContents()
+    val result:Iterator[Observable] = l.observeContents
     val expected = "A sock is on a book."
     assert(result.map(_.observe).mkString(" ")===expected)
   }
@@ -76,8 +76,8 @@ class LocationSpec extends FlatSpec with Matchers {
     l.add(t1)
     l.add(t2)
 
-    val result:Iterator[Observable] = l.observeContents()
-    val expected = "a book, a sock"
+    val result:Iterator[Observable] = l.observeContents
+    val expected = "You can see a sock, a goat and a book."
     assert(result.map(_.observe).mkString(",")===expected)
   }
 

@@ -22,7 +22,7 @@ class RelationshipSpec extends FlatSpec with Matchers {
     val r1: Relationship = rp.a.newRelationship(null, null)
 
     withClue("Serial Number") {
-      r0.sn should not be (r1.sn)
+      r0.sn should not be r1.sn
     }
   }
 

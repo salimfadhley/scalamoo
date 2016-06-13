@@ -1,6 +1,4 @@
-class Relationship(name:String, _inverse:Relationship) {
-  lazy val inverse = _inverse
-}
+val foo = List[Int](1,2,3,4)
+foo.init
 
-lazy val foo:Relationship = new Relationship(name="Foo", new Relationship(name="Bar", foo))
-assert(foo == foo.inverse.inverse)
+foo.last

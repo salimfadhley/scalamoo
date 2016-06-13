@@ -1,6 +1,6 @@
 package game
 
-import relationships.{Container, Relationship, Thing, Observable}
+import relationships._
 
 import scala.collection.mutable
 
@@ -14,8 +14,14 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
 
   def in(w: World): Boolean = w.contains(this)
 
-  override def observeContents():Iterator[Observable] = {
-    relationships.iterator
+  override def observeContents:Iterator[Observable] = {
+    val relatedItems:Set[Thing] = relationships.iterator.map((r)=>List(r.a, r.b)).flatten.toSet
+    val unrelatedItems:List[Thing] = contents.valuesIterator.filterNot((t:Thing)=>relatedItems.contains(t)).toList
+
+    relationships.iterator ++ (unrelatedItems  match {
+      case x:List[Thing] if x.nonEmpty => Iterator(new Unrelated(unrelatedItems))
+      case nil => Iterator.empty
+    })
   }
 
   def exits: Set[Exit] = {
