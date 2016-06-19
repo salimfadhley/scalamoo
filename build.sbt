@@ -7,7 +7,4 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 libraryDependencies += "org.scala-lang.modules" %% "scala-pickling" % "0.10.1"
 libraryDependencies += "org.specs2" %% "specs2-core" % "3.8.3" % "test"
 
-libraryDependencies += "com.twitter" %% "twitter-server" % "1.20.0"
-
-
 scalacOptions in Test ++= Seq("-Yrangepos")
