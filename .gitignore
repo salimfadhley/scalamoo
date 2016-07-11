@@ -20,9 +20,7 @@ project
 # http://www.scala-sbt.org/release/docs/Getting-Started/Directories.html#configuring-version-control
 
 # Created by .ignore support plugin (hsz.mobi)
-.idea/*.xml
-.idea/libraries/
-.idea/modules/
+.idea/**/*.xml
 src/main/java/
 src/main/resources/
 src/main/scala-2.11/
