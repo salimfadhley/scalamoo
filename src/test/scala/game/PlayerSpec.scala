@@ -35,4 +35,14 @@ class PlayerSpec extends FlatSpec with Matchers {
     assert(p.look(0) === "You are in a bedroom. A bucket is on a matress.")
   }
 
+  it should "fail if we try to move to an invalid location" in {
+    val w:World = World.bootstrap("Mario Land")
+
+    val l0 = w.newLocation("Attick")
+
+
+
+
+  }
+
 }
