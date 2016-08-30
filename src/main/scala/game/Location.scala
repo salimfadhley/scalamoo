@@ -15,7 +15,7 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
 
   def newRelatedLocation(name: String, relationship_name: String): Location = {
     val new_location:Location = _world.newLocation(name)
-    _world.relate(this, new_location, relationship_name)
+    _world.relate(new_location, this, relationship_name)
     new_location
   }
 

@@ -21,7 +21,13 @@ class LocationSpec extends FlatSpec with Matchers {
       .newRelatedLocation("The Hallway", "Down")
       .newRelatedLocation("The Cellar", "Down")
 
-    val l0:Option[Location] = w.getByName("The Hallway")
+    val hallway:Location = w.getByName("The Hallway").getOrElse(throw new RuntimeException)
+    val landing:Location = w.getByName("Upstairs Landing").getOrElse(throw new RuntimeException)
+
+    val result1:List[Location] = w.getRelated(hallway, "Up").toList
+    assert(result1.contains(landing))
+    result1 should have length 1
+
   }
 
   it should "be able to retrieve other locations by relationship name" in {
