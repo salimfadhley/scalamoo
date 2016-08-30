@@ -8,11 +8,16 @@ import scala.collection.mutable
   * Created by sal on 28/05/16.
   */
 class Location(_name: String, _world: World) extends Container(_name, _registry = _world.registry) with Observable {
-
   val world: World = _world
   val players: mutable.HashMap[Int, Player] = new mutable.HashMap[Int, Player]()
 
   def in(w: World): Boolean = w.contains(this)
+
+  def newRelatedLocation(name: String, relationship_name: String): Location = {
+    val new_location:Location = _world.newLocation(name)
+    _world.relate(new_location, this, relationship_name)
+    new_location
+  }
 
   override def observeContents:Iterator[Observable] = {
     val relatedItems:Set[Thing] = relationships.iterator.map((r)=>List(r.a, r.b)).flatten.toSet

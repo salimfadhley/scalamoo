@@ -1,13 +1,14 @@
 package game
 
 
+import java.lang
+
 import relationships.{Container, RelationshipTypeRegistry, Thing}
 
 /**
   * Created by sal on 28/05/16.
   */
 class World(name: String) extends Container(name, new RelationshipTypeRegistry("Default")) {
-
 
   var defaultLocationId: Option[Int] = None
 
@@ -20,6 +21,15 @@ class World(name: String) extends Container(name, new RelationshipTypeRegistry("
       case Some(x: Int) =>
     }
     l
+  }
+
+  def getByName(name: String): Option[Location] = {
+    contents.valuesIterator.asInstanceOf[Iterator[Location]].filter((l:Location)=>l.name==name).toList match {
+      case Nil => None
+      case Seq(l) => Some(l)
+      case Seq(x, rest @ _ *) => throw new RuntimeException(s"Too many matches for ${name}")
+    }
+
   }
 
   def add(l: Location): Location = {
@@ -98,6 +108,7 @@ object World {
     w.registry.createRelationshipPairs("North", "South")
     w.registry.createRelationshipPairs("East", "West")
     w.registry.createRelationshipPairs("On", "Under")
+    w.registry.createRelationshipPairs("Up", "Down")
     w
   }
 }

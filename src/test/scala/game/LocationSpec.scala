@@ -13,6 +13,23 @@ class LocationSpec extends FlatSpec with Matchers {
     val l = new Location("The First Room", w)
   }
 
+  it should "be able to make locations in a chained operation" in {
+    val w:World = World.bootstrap("The Earth")
+
+    w.newLocation("The Attic")
+      .newRelatedLocation("Upstairs Landing", "Down")
+      .newRelatedLocation("The Hallway", "Down")
+      .newRelatedLocation("The Cellar", "Down")
+
+    val hallway:Location = w.getByName("The Hallway").getOrElse(throw new RuntimeException)
+    val landing:Location = w.getByName("Upstairs Landing").getOrElse(throw new RuntimeException)
+
+    val result1:List[Location] = w.getRelated(hallway, "Up").toList
+    assert(result1.contains(landing))
+    result1 should have length 1
+
+  }
+
   it should "be able to retrieve other locations by relationship name" in {
     val w:World = World.bootstrap("The Earth")
     val locations:List[String] = List("A", "B", "C", "D")
