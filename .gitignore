@@ -28,3 +28,4 @@ src/test/java/
 src/test/resources/
 src/test/scala-2.11/
 src/main/scala/relationships/Unrelated.scala
+scalamoo.iml
