@@ -22,6 +22,13 @@ trait  Movable {
 
   def moveDirection(direction:String): Option[Location] = {
     location
+
+//    location match {
+//      case Some(l:Location) => l.exits.toList.filter(_.direction.like(direction)) match {
+//
+//      }
+//
+//    }
   }
 
 }

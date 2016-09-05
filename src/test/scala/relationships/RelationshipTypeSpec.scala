@@ -46,4 +46,35 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
 
   }
 
+  it should "never match an empty string" in {
+    val rr = new RelationshipTypeRegistry(name = "RR")
+    rr.createRelationshipPairs("North", "South")
+    val north:RelationshipType = rr.getByName("North")
+    assert(north.matchString("") === false, "Partial matches should always be true")
+  }
+
+
+
+  it should "always match the exact string" in {
+    val rr = new RelationshipTypeRegistry(name = "RR")
+    rr.createRelationshipPairs("North", "South")
+    val north:RelationshipType = rr.getByName("North")
+    assert(north.matchString("North") === true)
+  }
+
+  it should "match regardless of case" in {
+    val rr = new RelationshipTypeRegistry(name = "RR")
+    rr.createRelationshipPairs("North", "South")
+    val north:RelationshipType = rr.getByName("North")
+    assert(north.matchString("noRth") === true)
+  }
+
+//  it should "match a string which is a left-substring of the relationship name regardless of case" in {
+//    val rr = new RelationshipTypeRegistry(name = "RR")
+//    rr.createRelationshipPairs("North", "South")
+//    val north:RelationshipType = rr.getByName("North")
+//    assert(north.matchString("noR") === true)
+//  }
+
+
 }

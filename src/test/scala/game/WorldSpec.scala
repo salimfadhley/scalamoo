@@ -179,9 +179,9 @@ class WorldSpec extends FlatSpec with Matchers {
     val l1: Location = w.newLocation("The Second Room")
     w.registry.createRelationshipPairs("North", "South")
     val p0: Player = new Player("Hank")
+
     w.relate(l0, l1, "North") // l0 is north of l1
     w.addPlayer(p0)
-
     p0.location match {
       case Some(l:Location) => assert(l==l0)
       case _ => throw new RuntimeException("unexpected!")
@@ -189,6 +189,13 @@ class WorldSpec extends FlatSpec with Matchers {
 
     l0.contains(p0) should be(true)
     l1.contains(p0) should be(false)
+
+    // Now move the player
+
+    p0.moveDirection("North")
+
+//    l0.contains(p0) should be(false)
+//    l1.contains(p0) should be(true)
   }
 
 

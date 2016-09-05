@@ -61,7 +61,9 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
 }
 
 object Location {
+
   def locationFactory(w: World, locationNames: List[String]): List[Location] = {
     locationNames.map(ln => w.add(new Location(ln, w)))
   }
+
 }
