@@ -76,5 +76,12 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
     assert(north.matchString("nOr") === true)
   }
 
+  it should "things that are not sub-strings never match" in {
+    val rr = new RelationshipTypeRegistry(name = "RR")
+    rr.createRelationshipPairs("North", "South")
+    val north:RelationshipType = rr.getByName("North")
+    assert(north.matchString("nOX") === false)
+  }
+
 
 }
