@@ -13,5 +13,5 @@ https://travis-ci.org/salimfadhley/scalamoo
 
 # Big Thanks
 
-*To JetBrains for providing me with a free license for IntelliJ Ultimate Edition which is without
+* To [JetBrains](https://www.jetbrains.com/) for providing me with a free license for IntelliJ Ultimate Edition which is without
  doubt the world;s best IDE for Scala and Python developers.
