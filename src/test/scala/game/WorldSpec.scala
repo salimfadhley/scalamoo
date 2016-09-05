@@ -173,23 +173,23 @@ class WorldSpec extends FlatSpec with Matchers {
     }
   }
 
-//  it can "allow players to move between locations" in {
-//    val w = new World("The Earth")
-//    val l0: Location = w.newLocation("The First Room")
-//    val l1: Location = w.newLocation("The Second Room")
-//    w.registry.createRelationshipPairs("North", "South")
-//    val p0: Player = new Player("Hank")
-//    w.relate(l0, l1, "North") // l0 is north of l1
-//    w.addPlayer(p0)
-//
-//    p0.location match {
-//      case Some(l:Location) => assert(l==l0)
-//      case _ => throw new RuntimeException("unexpected!")
-//    }
-//
-//    l0.contains(p0) should be(true)
-//    l1.contains(p0) should be(false)
-//  }
+  it can "allow players to move between locations" in {
+    val w = new World("The Earth")
+    val l0: Location = w.newLocation("The First Room")
+    val l1: Location = w.newLocation("The Second Room")
+    w.registry.createRelationshipPairs("North", "South")
+    val p0: Player = new Player("Hank")
+    w.relate(l0, l1, "North") // l0 is north of l1
+    w.addPlayer(p0)
+
+    p0.location match {
+      case Some(l:Location) => assert(l==l0)
+      case _ => throw new RuntimeException("unexpected!")
+    }
+
+    l0.contains(p0) should be(true)
+    l1.contains(p0) should be(false)
+  }
 
 
 }
