@@ -12,6 +12,6 @@ I'm trying to create a text-based virtual using modern development tools (e.g. S
 * To [JetBrains](https://www.jetbrains.com/) for providing me with a free license for IntelliJ Ultimate Edition which is without
  doubt the world;s best IDE for Scala and Python developers.
 
- # Tests
+# Tests
 
 * [![Build Status](https://travis-ci.org/salimfadhley/scalamoo.svg?branch=master)](https://travis-ci.org/salimfadhley/scalamoo) Current [test status](https://travis-ci.org/salimfadhley/scalamoo).
