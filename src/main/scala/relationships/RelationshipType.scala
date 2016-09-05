@@ -20,6 +20,8 @@ class RelationshipType(_name: String, _inverse: => RelationshipType, _registry: 
     s.toLowerCase match {
       case ss if ss.isEmpty => false
       case ss if (name.toLowerCase == ss) => true
+      case ss if name.toLowerCase.startsWith(ss) => true
+      case _ => false
     }
 
   }

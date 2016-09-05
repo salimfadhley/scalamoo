@@ -69,12 +69,12 @@ class RelationshipTypeSpec extends FlatSpec with Matchers {
     assert(north.matchString("noRth") === true)
   }
 
-//  it should "match a string which is a left-substring of the relationship name regardless of case" in {
-//    val rr = new RelationshipTypeRegistry(name = "RR")
-//    rr.createRelationshipPairs("North", "South")
-//    val north:RelationshipType = rr.getByName("North")
-//    assert(north.matchString("noR") === true)
-//  }
+  it should "match non-empty substrings regardless of case" in {
+    val rr = new RelationshipTypeRegistry(name = "RR")
+    rr.createRelationshipPairs("North", "South")
+    val north:RelationshipType = rr.getByName("North")
+    assert(north.matchString("nOr") === true)
+  }
 
 
 }
