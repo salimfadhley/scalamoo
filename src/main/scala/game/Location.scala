@@ -8,6 +8,8 @@ import scala.collection.mutable
   * Created by sal on 28/05/16.
   */
 class Location(_name: String, _world: World) extends Container(_name, _registry = _world.registry) with Observable {
+
+
   val world: World = _world
   val players: mutable.HashMap[Int, Player] = new mutable.HashMap[Int, Player]()
 
@@ -27,12 +29,6 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
       case x:List[Thing] if x.nonEmpty => Iterator(new Unrelated(unrelatedItems))
       case nil => Iterator.empty
     })
-  }
-
-  def exits: Set[Exit] = {
-    _world.getRelationships(this).map(
-      (r: Relationship) => new Exit(r.b.asInstanceOf[Location], r.relationshipType.inverse)
-    ).toSet
   }
 
   def addPlayer(p: Player): Player = {
@@ -56,6 +52,31 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
 
   def getRelated(l: Location, rn: String): Iterator[Location] = {
     super.getRelated(l.asInstanceOf[Thing], rn).asInstanceOf[Iterator[Location]]
+  }
+
+  def searchAdjacent(direction: String): Option[Exit] = {
+    val filteredExits = exits.toList.filter(_.direction.matchString(direction))
+
+    filteredExits match {
+      case Nil => {
+        println(filteredExits)
+        None
+      }
+      case Seq(a) => Some(a)
+      case Seq(a, rest@_ *) => {
+        println(a)
+        None
+
+
+      }
+    }
+
+  }
+
+  def exits: Set[Exit] = {
+    _world.getRelationships(this).map(
+      (r: Relationship) => new Exit(r.b.asInstanceOf[Location], r.relationshipType.inverse)
+    ).toSet
   }
 
 }

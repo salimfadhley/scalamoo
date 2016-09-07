@@ -53,6 +53,28 @@ class LocationSpec extends FlatSpec with Matchers {
     result1 should have length 1
   }
 
+  it should "be able to retrieve other locations by partial relationship name" in {
+    val w: World = World.bootstrap("The Earth")
+    val locations: List[String] = List("A", "B", "C", "D")
+    val ll: List[Location] = Location.locationFactory(w, locations)
+
+    val roomA = ll.head
+    val roomB = ll(1)
+    val roomC = ll(2)
+    val roomD = ll(3)
+
+    w.relate(roomA, roomB, "North") // A is North of B
+    w.relate(roomA, roomC, "South") // A is South of C
+    w.relate(roomA, roomD, "East") //  A is East of D
+
+    val result: Exit = roomA.searchAdjacent("noR").get
+
+    result.to.shouldEqual(roomC)
+
+  }
+
+
+
   it should "be able to observe locations"  in {
     val w:World = World.bootstrap("Meh")
     val l:Observable = w.newLocation("bedroom")
