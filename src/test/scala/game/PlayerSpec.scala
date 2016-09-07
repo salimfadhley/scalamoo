@@ -36,7 +36,7 @@ class PlayerSpec extends FlatSpec with Matchers with Assertions {
   }
 
   it should "fail if we try to move to an invalid location" in {
-    val w:World = World.bootstrap("Mario Land")
+    val w: World = World.bootstrap("Mario Land")
 
     val l0 = w.newLocation("Attic")
     val p: Player = new Player("Ash")
@@ -45,11 +45,19 @@ class PlayerSpec extends FlatSpec with Matchers with Assertions {
     intercept[NoWayOut] {
       p.moveDirection("n")
     }
-
-
-
-
-
   }
+
+
+  it should "fail if we try to move to move a player that isnt in a location" in {
+    val w: World = World.bootstrap("Mario Land")
+
+    val l0 = w.newLocation("Attic")
+    val p: Player = new Player("Ash")
+
+    intercept[PlayerIsInLimbo] {
+      p.moveDirection("n")
+    }
+  }
+
 
 }

@@ -22,7 +22,7 @@ class Player(_name: String) extends Thing(_name) with Movable with Observer {
 
   def moveDirection(direction: String): Option[Location] = {
     location match {
-      case None => throw new RuntimeException("dasfanananafnfa")
+      case None => throw new PlayerIsInLimbo("Meh!")
       case Some(l: Location) => {
         val e: Option[Exit] = l.findExit(direction)
         e match {
