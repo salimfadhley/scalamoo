@@ -1,12 +1,12 @@
 package game
 
-import org.scalatest.{FlatSpec, Matchers}
-import relationships.{Observable, Observer, Thing}
+import org.scalatest.{Assertions, FlatSpec, Matchers}
+import relationships.{Observer, Thing}
 
 /**
   * Created by salim on 04/06/2016.
   */
-class PlayerSpec extends FlatSpec with Matchers {
+class PlayerSpec extends FlatSpec with Matchers with Assertions {
 
   "Player" should "be able to look at a void" in {
     val p:Observer = new Player("Hank")
@@ -38,7 +38,14 @@ class PlayerSpec extends FlatSpec with Matchers {
   it should "fail if we try to move to an invalid location" in {
     val w:World = World.bootstrap("Mario Land")
 
-    val l0 = w.newLocation("Attick")
+    val l0 = w.newLocation("Attic")
+    val p: Player = new Player("Ash")
+    w.addPlayer(p)
+
+    intercept[NoWayOut] {
+      p.moveDirection("n")
+    }
+
 
 
 

@@ -182,20 +182,18 @@ class WorldSpec extends FlatSpec with Matchers {
 
     w.relate(l0, l1, "North") // l0 is north of l1
     w.addPlayer(p0)
-    p0.location match {
-      case Some(l:Location) => assert(l==l0)
-      case _ => throw new RuntimeException("unexpected!")
-    }
 
+    p0.location.get should be(l0)
     l0.contains(p0) should be(true)
     l1.contains(p0) should be(false)
 
     // Now move the player
 
-    p0.moveDirection("North")
+    p0.moveDirection("South")
 
-//    l0.contains(p0) should be(false)
-//    l1.contains(p0) should be(true)
+    p0.location.get should be(l1)
+    l0.contains(p0) should be(false)
+    l1.contains(p0) should be(true)
   }
 
 

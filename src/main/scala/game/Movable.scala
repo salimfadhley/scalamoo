@@ -1,12 +1,12 @@
 package game
 
-import relationships.Relationship
-
 /**
   * Created by salim on 31/05/2016.
   */
-trait  Movable {
+trait Movable {
   var location: Option[Location] = None
+
+  def sn: Int
 
   def setLocation(l: Location) = {
     location = Some(l)
@@ -16,19 +16,5 @@ trait  Movable {
     location = None
   }
 
-  def getExits(): Option[Relationship] = {
-    None
-  }
-
-  def moveDirection(direction:String): Option[Location] = {
-    location
-
-//    location match {
-//      case Some(l:Location) => l.exits.toList.filter(_.direction.like(direction)) match {
-//
-//      }
-//
-//    }
-  }
-
+  def moveDirection(direction: String): Option[Location]
 }

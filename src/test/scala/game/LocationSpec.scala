@@ -67,7 +67,7 @@ class LocationSpec extends FlatSpec with Matchers {
     w.relate(roomA, roomC, "South") // A is South of C
     w.relate(roomA, roomD, "East") //  A is East of D
 
-    val result: Exit = roomA.searchAdjacent("noR").get
+    val result: Exit = roomA.findExit("noR").get
 
     result.to.shouldEqual(roomC)
 

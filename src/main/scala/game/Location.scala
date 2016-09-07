@@ -54,7 +54,7 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
     super.getRelated(l.asInstanceOf[Thing], rn).asInstanceOf[Iterator[Location]]
   }
 
-  def searchAdjacent(direction: String): Option[Exit] = {
+  def findExit(direction: String): Option[Exit] = {
     val filteredExits = exits.toList.filter(_.direction.matchString(direction))
 
     filteredExits match {
@@ -66,8 +66,6 @@ class Location(_name: String, _world: World) extends Container(_name, _registry 
       case Seq(a, rest@_ *) => {
         println(a)
         None
-
-
       }
     }
 

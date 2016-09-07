@@ -7,4 +7,6 @@ import relationships.Thing
   */
 class Monster(_name: String) extends Thing(_name) with Movable {
 
+  override def moveDirection(direction: String): Option[Location] = None
+
 }
