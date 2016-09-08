@@ -1,8 +1,9 @@
-package world
+package model
 
 /**
   * Created by salim on 9/8/2016.
   */
-trait Actor {
+trait Visitable[T <: Actor] {
+
 
 }

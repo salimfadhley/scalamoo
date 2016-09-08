@@ -1,4 +1,4 @@
-package world
+package model
 
 import org.scalatest.{FlatSpec, Matchers}
 
