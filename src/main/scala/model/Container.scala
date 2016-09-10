@@ -18,12 +18,31 @@ trait Container[T <: Containable] extends BaseGameObject {
 
   def spawn(): T = {
     val item = contentsFactory()
-    put(item, this.sn)
+    put(item)
     item
   }
 
-  def put(thing: T, container_id: Int) = {
-    contents.put(thing.sn, thing)
+  def put(thing: T) = {
+    thing.containerId match {
+      case None => {
+        thing.containerId = Some(sn)
+        contents.put(thing.sn, thing)
+      }
+      case Some(id) if id != sn => throw new AlreadyInAContainer(s"Already in container ${id}")
+      case _ =>
+    }
+  }
+
+  def remove(sn: Int): Option[T] = {
+    val item = contents.remove(sn)
+
+    item match {
+      case Some(i: T) => {
+        i.clearContainer()
+        item
+      }
+      case None => None
+    }
   }
 
   def getById(sn: Int): Option[T] = {

@@ -7,4 +7,8 @@ trait Containable extends BaseGameObject {
 
   var containerId: Option[Int] = None
 
+  def clearContainer(): Unit = {
+    containerId = None
+  }
+
 }
