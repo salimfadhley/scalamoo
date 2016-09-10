@@ -17,5 +17,13 @@ trait Graph[T <: Containable] extends Container[T] {
     edge
   }
 
+  def incidentEdges(node: T): Set[Edge] = {
+    incidentEdges(node.sn)
+  }
+
+  def incidentEdges(sn: Int): Set[Edge] = {
+    edges.filter((e: Edge) => e.a == sn || e.b == sn).toSet
+  }
+
 
 }
