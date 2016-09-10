@@ -39,12 +39,14 @@ trait Container[T <: Containable] extends BaseGameObject {
     val item = contents.remove(sn)
 
     item match {
-      case Some(i: T) => {
+      case Some(i) => {
         i.clearContainer()
         item
       }
-      case None => None
+      case None =>
     }
+
+    item
   }
 
   def getById(sn: Int): Option[T] = {
