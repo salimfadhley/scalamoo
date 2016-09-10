@@ -35,6 +35,14 @@ class Thingpec extends FlatSpec with Matchers with BeforeAndAfterEach {
     assert(t.containerId.isEmpty, "Thing should have no reference to a container since it has been removed")
   }
 
+  it can "be taken out from a room without knowin the sn" in {
+    assert(r.getById(t.sn).get == t, "Initially the thing is in the loccation")
+    assert(t.containerId.get == r.sn, "And it has a reference back to the location")
+    r.remove(t)
+    assert(r.getById(t.sn).isEmpty, "Thing should not be in the old location")
+    assert(t.containerId.isEmpty, "Thing should have no reference to a container since it has been removed")
+  }
+
   it can "throw an error if you try to add an item to a second room" in {
     val r1 = w.newRoom
     intercept[AlreadyInAContainer](
@@ -44,7 +52,12 @@ class Thingpec extends FlatSpec with Matchers with BeforeAndAfterEach {
 
   it can "being added to the same room as a no-op" in {
     r.put(t)
+  }
 
+  it can "transfer a thing from one room to another" in {
+    val r1 = w.newRoom
+    r1.put(r.remove(t.sn).get)
+    assert(r1.sn == t.containerId.get)
   }
 
 

@@ -33,6 +33,8 @@ trait Container[T <: Containable] extends BaseGameObject {
     }
   }
 
+  def remove(t: Thing): Option[T] = remove(t.sn)
+
   def remove(sn: Int): Option[T] = {
     val item = contents.remove(sn)
 
