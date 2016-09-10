@@ -17,6 +17,18 @@ trait Graph[T <: Containable] extends Container[T] {
     edge
   }
 
+  override def remove(sn: Int): Option[T] = {
+    val oe = super.remove(sn)
+    oe match {
+      case None =>
+      case Some(node) => {
+        val removeList = incidentEdges(node)
+        removeList.foreach((e: Edge) => edges.remove(e))
+      }
+    }
+    oe
+  }
+
   def incidentEdges(node: T): Set[Edge] = {
     incidentEdges(node.sn)
   }
