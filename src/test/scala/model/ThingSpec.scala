@@ -5,7 +5,7 @@ import org.scalatest.{BeforeAndAfterEach, FlatSpec, Matchers}
 /**
   * Created by salim on 9/9/2016.
   */
-class Thingpec extends FlatSpec with Matchers with BeforeAndAfterEach {
+class ThingSpec extends FlatSpec with Matchers with BeforeAndAfterEach {
 
   var w: World = null
   var r: Room = null
@@ -58,6 +58,21 @@ class Thingpec extends FlatSpec with Matchers with BeforeAndAfterEach {
     val r1 = w.newRoom
     r1.put(r.remove(t.sn).get)
     assert(r1.sn == t.containerId.get)
+  }
+
+  "Paths" can "be resolved" in {
+    val addr = ThingAddress(r.sn, t.sn)
+    assert(addr.resolve(w).get == t)
+  }
+
+  it can "be resolved to None if the thing id is bogus" in {
+    val addr = ThingAddress(r.sn, t.sn + 1)
+    assert(addr.resolve(w).isEmpty)
+  }
+
+  it can "be resolved to None if the room id is bogus" in {
+    val addr = ThingAddress(r.sn + 1, t.sn)
+    assert(addr.resolve(w).isEmpty)
   }
 
 
