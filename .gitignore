@@ -22,7 +22,6 @@ project
 # Created by .ignore support plugin (hsz.mobi)
 .idea/**/*.xml
 src/main/java/
-src/main/resources/
 src/main/scala-2.11/
 src/test/java/
 src/test/resources/
