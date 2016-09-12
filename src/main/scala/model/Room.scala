@@ -13,9 +13,5 @@ case class Room(sn: Int, snGenerator: () => Int, container: World) extends Conta
     spawn()
   }
 
-  def named(name: String) = {
-    setName(name)
-    this
-  }
 
 }

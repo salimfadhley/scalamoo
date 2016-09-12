@@ -1,6 +1,6 @@
 package model.monsters
 
-import java.io.InputStream
+import java.io.{ByteArrayInputStream, InputStream}
 
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -16,7 +16,15 @@ class PokedexSpec extends FlatSpec with Matchers {
     val pokedexStreams: InputStream = getClass.getResourceAsStream("/pokedex/pokedex/data/csv/pokemon.csv")
     val p: Pokedex = new Pokedex()
     p.loadFromStream(pokedexStreams)
-
-
   }
+
+  it should "be able to decode pokedex entries" in {
+    val p: Pokedex = new Pokedex()
+    val input: String =
+      """id,identifier,species_id,height,weight,base_experience,order,is_default
+        |1,bulbasaur,1,7,69,64,1,1"""
+
+    p.loadFromStream(new ByteArrayInputStream(input.getBytes))
+  }
+
 }
