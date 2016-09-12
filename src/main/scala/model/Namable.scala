@@ -6,10 +6,13 @@ package model
 trait Namable[T] {
   var name: Option[String] = None
 
+  def named(n: String): T = {
+    setName(n)
+    this.asInstanceOf[T]
+  }
+
   def setName(n: String) = {
     name = Some(n)
   }
-
-  def named(n: String): T
 
 }
