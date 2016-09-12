@@ -1,4 +1,4 @@
-package battle
+package model.battle
 
 import model.{Game, Player}
 import org.scalatest.{FlatSpec, Matchers}

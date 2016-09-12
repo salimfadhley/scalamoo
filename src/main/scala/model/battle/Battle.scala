@@ -1,6 +1,4 @@
-package battle
-
-import model.Battleable
+package model.battle
 
 /**
   * Created by salim on 12/09/2016.

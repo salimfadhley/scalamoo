@@ -9,7 +9,11 @@ class GameSpec extends FlatSpec with Matchers {
 
   "game" should "be bootstrappable" in {
     val g: Game = Game.boot()
+  }
 
+  it should "have a bootstrapped pokedex" in {
+    val g: Game = Game.boot()
+    assert(g.pokedex.getById(25).get.name == "pikachu")
   }
 
 

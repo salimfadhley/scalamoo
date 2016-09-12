@@ -9,7 +9,7 @@ case class Game(world: World, pokedex: Pokedex)
 
 object Game {
   def boot(): Game = {
-    Game(World.factory, new Pokedex())
+    Game(World.factory, Pokedex.boot)
   }
 }
 

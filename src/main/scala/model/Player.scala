@@ -1,5 +1,7 @@
 package model
 
+import model.battle.Battleable
+
 /**
   * Created by salim on 9/10/2016.
   */
