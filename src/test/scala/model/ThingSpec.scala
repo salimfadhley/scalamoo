@@ -75,12 +75,4 @@ class ThingSpec extends FlatSpec with Matchers with BeforeAndAfterEach {
     assert(addr.resolve(w).isEmpty)
   }
 
-
-
-  //  "it" should "be gettable by path" in {
-  //    val path = List(r.sn, t.sn)
-  //    assert(w.getByPath(path) == t)
-  //  }
-
-
 }
