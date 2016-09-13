@@ -27,12 +27,12 @@ class PokedexSpec extends FlatSpec with Matchers {
 
     assert(pe.id == 691)
     assert(pe.name == "dragalge")
-    assert(pe.speciesId == 691)
+    assert(pe.species_id == 691)
     assert(pe.height == 18)
     assert(pe.weight == 815)
-    assert(pe.baseExperience == 173)
+    assert(pe.base_experience == 173)
     assert(pe.order == 774)
-    assert(pe.isDefault == true)
+    assert(pe.is_default == true)
 
 
 
