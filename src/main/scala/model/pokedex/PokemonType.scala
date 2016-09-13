@@ -5,11 +5,15 @@ package model.pokedex
   */
 case class PokemonType(id: Int, identifier: String, generation_id: Int, damage_class_id: Int) {}
 
+// id,identifier,generation_id,damage_class_id
+
 object PokemonType extends DexThing[PokemonType] {
-  override def fromMap(row: Map[String, String]): PokemonType = PokemonType(
-    row("id").i,
-    row("identifier"),
-    row("generation_id").i,
-    row("damage_class_id").i
-  )
+  override def fromMap(row: Map[String, String]): PokemonType = {
+    PokemonType(
+      row("id").i,
+      row("identifier"),
+      row("generation_id").i,
+      row("damage_class_id").i
+    )
+  }
 }

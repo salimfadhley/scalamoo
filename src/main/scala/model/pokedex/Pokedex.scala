@@ -1,6 +1,4 @@
 package model.pokedex
-import java.io.InputStream
-
 import com.github.tototoshi.csv._
 
 import scala.collection.mutable
@@ -10,31 +8,56 @@ import scala.io.Source
   * Created by salim on 12/09/2016.
   */
 class Pokedex {
-  val dex = mutable.HashMap[Int, PokedexEntry]()
+  val pokemon = mutable.HashMap[Int, PokedexEntry]()
+  val types = mutable.HashMap[Int, PokemonType]()
 
-  def addPokedexEntriesFromSource(source: Source): Unit = {
-    CSVReader.open(source).iteratorWithHeaders.foreach(addPokedexEntry(_))
-  }
 
   def addPokedexEntry(row: Map[String, String]): Unit = {
     val pe: PokedexEntry = PokedexEntry.fromMap(row)
-    dex.put(pe.id, pe)
+    pokemon.put(pe.id, pe)
+  }
+
+  def addType(row: Map[String, String]): Unit = {
+    val pt: PokemonType = PokemonType.fromMap(row)
+    types.put(pt.id, pt)
+
   }
 
   def getPokedexEntriesById(i: Int): Option[PokedexEntry] = {
-    dex.get(i)
+    pokemon.get(i)
   }
+
+
 }
 
 object Pokedex {
-  def boot(): Pokedex = {
-    val p = new Pokedex()
 
-    val pokemon: InputStream = getClass.getResourceAsStream("/pokedex/pokedex/data/csv/pokemon.csv")
-    p.addPokedexEntriesFromSource(Source.fromInputStream(pokemon))
+  def boot: Pokedex = {
+    val p = new Pokedex()
+    openStreamAndLoad("pokemon", p.addPokedexEntry)
+    openStreamAndLoad("types", p.addType)
 
     p
   }
+
+  def openStreamAndLoad(s: String, addEntry: (Map[String, String]) => Unit) = {
+    val path: String = s"/pokedex/pokedex/data/csv/$s.csv"
+    val data: Source = Source.fromInputStream(getClass.getResourceAsStream(path))
+    loadItemsFromSource(addEntry, data)
+  }
+
+  def loadItemsFromSource(addEntry: (Map[String, String]) => Unit, data: Source): Unit = {
+    CSVReader.open(data).iteratorWithHeaders.foreach(addEntry)
+  }
+
+
+  //
+  //    //    val pokemon: InputStream = getClass.getResourceAsStream("/pokedex/pokedex/data/csv/pokemon.csv")
+  //    //    p.addPokedexEntriesFromSource(Source.fromInputStream(pokemon))
+  //
+  ////    openStreamAndLoad[PokedexEntry]("pokemon", p.pokemon)
+  //
+  //  }
 
 }
 
