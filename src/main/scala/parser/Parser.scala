@@ -1,6 +1,6 @@
 package parser
 
-import game.{Movable, Player, World}
+import model.Movable
 
 /**
   * Created by salim on 12/08/2016.
