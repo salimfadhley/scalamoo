@@ -1,6 +1,6 @@
 package model
 
-import model.monsters.Pokemon
+import model.pokemon.Pokemon
 
 /**
   * Created by salim on 12/09/2016.

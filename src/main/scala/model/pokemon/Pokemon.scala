@@ -1,4 +1,4 @@
-package model.monsters
+package model.pokemon
 
 import model.Namable
 import model.battle.Battleable

@@ -1,4 +1,4 @@
-package model.monsters
+package model.pokemon
 import java.io.InputStream
 
 import com.github.tototoshi.csv._
@@ -13,8 +13,7 @@ class Pokedex {
   val dex = mutable.HashMap[Int, PokedexEntry]()
 
   def addPokedexEntriesFromSource(source: Source): Unit = {
-    val reader: CSVReader = CSVReader.open(source)
-    reader.iteratorWithHeaders.foreach(addPokedexEntry(_))
+    CSVReader.open(source).iteratorWithHeaders.foreach(addPokedexEntry(_))
   }
 
   def addPokedexEntry(row: Map[String, String]): Unit = {
@@ -29,9 +28,11 @@ class Pokedex {
 
 object Pokedex {
   def boot(): Pokedex = {
-    val is: InputStream = getClass.getResourceAsStream("/pokedex/pokedex/data/csv/pokemon.csv")
     val p = new Pokedex()
-    p.addPokedexEntriesFromSource(Source.fromInputStream(is))
+
+    val pokemon: InputStream = getClass.getResourceAsStream("/pokedex/pokedex/data/csv/pokemon.csv")
+    p.addPokedexEntriesFromSource(Source.fromInputStream(pokemon))
+
     p
   }
 

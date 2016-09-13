@@ -9,7 +9,7 @@ case class ConvertibleThing(s: String) {
   def b: Boolean = s.toInt > 0
 }
 
-package object monsters extends {
+package object pokemon extends {
   implicit def stringToConvertible(s: String): ConvertibleThing = {
     ConvertibleThing(s)
   }

@@ -1,4 +1,4 @@
-package model.monsters
+package model.pokemon
 
 /**
   * Created by salim on 12/09/2016.

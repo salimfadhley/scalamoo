@@ -1,4 +1,4 @@
-package model.monsters
+package model.pokemon
 
 import org.scalatest.{FlatSpec, Matchers}
 
