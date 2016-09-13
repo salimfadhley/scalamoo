@@ -12,17 +12,17 @@ import scala.io.Source
 class Pokedex {
   val dex = mutable.HashMap[Int, PokedexEntry]()
 
-  def fromSource(source: Source): Unit = {
+  def addPokedexEntriesFromSource(source: Source): Unit = {
     val reader: CSVReader = CSVReader.open(source)
-    reader.iteratorWithHeaders.foreach(add_entry(_))
+    reader.iteratorWithHeaders.foreach(addPokedexEntry(_))
   }
 
-  def add_entry(row: Map[String, String]): Unit = {
+  def addPokedexEntry(row: Map[String, String]): Unit = {
     val pe: PokedexEntry = PokedexEntry.fromMap(row)
     dex.put(pe.id, pe)
   }
 
-  def getById(i: Int): Option[PokedexEntry] = {
+  def getPokedexEntriesById(i: Int): Option[PokedexEntry] = {
     dex.get(i)
   }
 }
@@ -31,7 +31,7 @@ object Pokedex {
   def boot(): Pokedex = {
     val is: InputStream = getClass.getResourceAsStream("/pokedex/pokedex/data/csv/pokemon.csv")
     val p = new Pokedex()
-    p.fromSource(Source.fromInputStream(is))
+    p.addPokedexEntriesFromSource(Source.fromInputStream(is))
     p
   }
 

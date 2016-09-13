@@ -21,9 +21,9 @@ class PokedexSpec extends FlatSpec with Matchers {
 
     // id,identifier,species_id,height,weight,base_experience,order,is_default
     // 691,dragalge,691,18,815,173,774,1
-    p.fromSource(Source.fromInputStream(is))
+    p.addPokedexEntriesFromSource(Source.fromInputStream(is))
 
-    val pe: PokedexEntry = p.getById(691).get
+    val pe: PokedexEntry = p.getPokedexEntriesById(691).get
 
     assert(pe.id == 691)
     assert(pe.name == "dragalge")
@@ -43,8 +43,8 @@ class PokedexSpec extends FlatSpec with Matchers {
     val input: String =
       """id,identifier,species_id,height,weight,base_experience,order,is_default
         |1,bulbasaur,1,7,69,64,1,1""".stripMargin
-    p.fromSource(Source.fromString(input))
-    val bulbasaur: PokedexEntry = p.getById(1).get
+    p.addPokedexEntriesFromSource(Source.fromString(input))
+    val bulbasaur: PokedexEntry = p.getPokedexEntriesById(1).get
   }
 
   it should "be able to decode pokedex single line loads" in {
@@ -52,8 +52,8 @@ class PokedexSpec extends FlatSpec with Matchers {
     val input: String =
       """id,identifier,species_id,height,weight,base_experience,order,is_default
         |1,bulbasaur,1,7,69,64,1,1""".stripMargin
-    p.fromSource(Source.fromString(input))
-    val bulbasaur: PokedexEntry = p.getById(1).get
+    p.addPokedexEntriesFromSource(Source.fromString(input))
+    val bulbasaur: PokedexEntry = p.getPokedexEntriesById(1).get
     assert(bulbasaur.id == 1)
     assert(bulbasaur.name == "bulbasaur")
   }
@@ -65,9 +65,9 @@ class PokedexSpec extends FlatSpec with Matchers {
         |1,bulbasaur,1,7,69,64,1,1
         |10,caterpie,10,3,29,39,14,1""".stripMargin
 
-    p.fromSource(Source.fromString(input))
+    p.addPokedexEntriesFromSource(Source.fromString(input))
 
-    val catarpie: Option[PokedexEntry] = p.getById(10)
+    val catarpie: Option[PokedexEntry] = p.getPokedexEntriesById(10)
     assert(catarpie.get.id == 10)
   }
 
