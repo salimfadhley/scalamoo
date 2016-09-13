@@ -1,4 +1,4 @@
-package model.pokemon
+package model.pokedex
 
 /**
   * Created by salim on 13/09/2016.

@@ -1,6 +1,6 @@
 package model
 
-import model.pokemon.Pokedex
+import model.pokedex.Pokedex
 
 /**
   * Created by salim on 12/09/2016.

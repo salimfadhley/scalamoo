@@ -1,4 +1,4 @@
-package model.pokemon
+package model.pokedex
 
 import model.Namable
 import model.battle.Battleable

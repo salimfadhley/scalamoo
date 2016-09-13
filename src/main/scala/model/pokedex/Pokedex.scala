@@ -1,4 +1,4 @@
-package model.pokemon
+package model.pokedex
 import java.io.InputStream
 
 import com.github.tototoshi.csv._
