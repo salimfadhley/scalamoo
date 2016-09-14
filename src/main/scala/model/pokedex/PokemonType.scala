@@ -1,19 +1,19 @@
 package model.pokedex
 
 /**
-  * Created by salim on 13/09/2016.
+  * Created by salim on 14/09/2016.
   */
-case class PokemonType(id: Int, identifier: String, generation_id: Int, damage_class_id: Int) {}
+case class PokemonType(pokemon_id: Int, type_id: Int, slot: Int) {
+}
 
-// id,identifier,generation_id,damage_class_id
-
+// pokemon_id,type_id,slot
 object PokemonType extends DexThing[PokemonType] {
   override def fromMap(row: Map[String, String]): PokemonType = {
     PokemonType(
-      row("id").i,
-      row("identifier"),
-      row("generation_id").i,
-      row("damage_class_id").i
+      row("pokemon_id").i,
+      row("type_id").i,
+      row("slot").i
     )
+
   }
 }

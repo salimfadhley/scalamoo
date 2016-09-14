@@ -5,7 +5,7 @@ import org.scalatest.{FlatSpec, Matchers}
 /**
   * Created by salim on 13/09/2016.
   */
-class PokemonTypeSpec extends FlatSpec with Matchers {
+class TypeSpec extends FlatSpec with Matchers {
 
   "PokemoTypes" should "be able to load csv" in {
     val input =

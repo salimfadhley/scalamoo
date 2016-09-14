@@ -9,18 +9,22 @@ import scala.io.Source
   */
 class Pokedex {
   val pokemon = mutable.HashMap[Int, PokedexEntry]()
-  val types = mutable.HashMap[Int, PokemonType]()
-
+  val pokemonTypes = mutable.HashMap[Int, PokemonType]()
+  val types = mutable.HashMap[Int, Type]()
 
   def addPokedexEntry(row: Map[String, String]): Unit = {
     val pe: PokedexEntry = PokedexEntry.fromMap(row)
     pokemon.put(pe.id, pe)
   }
 
-  def addType(row: Map[String, String]): Unit = {
+  def addPokemonType(row: Map[String, String]): Unit = {
     val pt: PokemonType = PokemonType.fromMap(row)
-    types.put(pt.id, pt)
+    pokemonTypes.put(pt.pokemon_id, pt)
+  }
 
+  def addType(row: Map[String, String]): Unit = {
+    val pt: Type = Type.fromMap(row)
+    types.put(pt.id, pt)
   }
 
   def getPokedexEntriesById(i: Int): Option[PokedexEntry] = {
@@ -35,6 +39,7 @@ object Pokedex {
   def boot: Pokedex = {
     val p = new Pokedex()
     openStreamAndLoad("pokemon", p.addPokedexEntry)
+    openStreamAndLoad("pokemon_types", p.addPokemonType)
     openStreamAndLoad("types", p.addType)
 
     p

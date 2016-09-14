@@ -10,8 +10,6 @@ case class ConvertibleThing(s: String) {
     } catch {
       case e: NumberFormatException => -1
     }
-
-
   }
   def b: Boolean = s.toInt > 0
 }

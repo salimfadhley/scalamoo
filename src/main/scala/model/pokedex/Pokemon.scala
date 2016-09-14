@@ -10,7 +10,6 @@ class Pokemon(pokedexEntry: PokedexEntry) extends Battleable with Namable[Pokemo
   override var maxHitPoints: Int = 1
 }
 
-
 object Pokemon {
 
 }
