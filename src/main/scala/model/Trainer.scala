@@ -10,7 +10,10 @@ trait Trainer {
   val pokemon = mutable.MutableList[Pokemon]()
 
   def addPokemon(p: Pokemon): Unit = {
-    pokemon += p
+    pokemon.size match {
+      case i: Int if i < 6 => pokemon += p
+      case _ => throw new PokemonLimitReached("dddd")
+    }
   }
 
   def getPokemon: List[Pokemon] = {
