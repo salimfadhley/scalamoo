@@ -13,12 +13,12 @@ class WorldSpec extends FlatSpec with Matchers {
   }
 
   it should "have a factory" in {
-    val w: World = World.factory()
+    val w: World = World.factory(snGenratorFactory())
     assert(w.sn == 0)
   }
 
   it can "create locations" in {
-    val w: World = World.factory()
+    val w: World = World.factory(snGenratorFactory())
     w.newRoom.setName("The very first room.")
   }
 

@@ -6,7 +6,6 @@ package model
 case class World(sn: Int, snGenerator: () => Int) extends BaseGameObject with Graph[Room] {
 
 
-
   override def contentsFactory(): Room = {
     Room(snGenerator(), snGenerator, container = this)
   }
@@ -18,8 +17,7 @@ case class World(sn: Int, snGenerator: () => Int) extends BaseGameObject with Gr
 }
 
 object World {
-  def factory(): World = {
-    val g = snGenratorFactory()
+  def factory(g: () => Int): World = {
     World(g(), g)
   }
 

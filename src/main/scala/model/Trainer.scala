@@ -1,13 +1,21 @@
 package model
 
-import model.pokedex.Pokemon
+import scala.collection.mutable
 
 /**
   * Created by salim on 12/09/2016.
   */
 trait Trainer {
 
-  val activeMonsters: List[Pokemon] = List()
+  val pokemon = mutable.MutableList[Pokemon]()
+
+  def addPokemon(p: Pokemon): Unit = {
+    pokemon += p
+  }
+
+  def getPokemon: List[Pokemon] = {
+    pokemon.toIterator.toList
+  }
 
 
 }

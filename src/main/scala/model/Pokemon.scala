@@ -1,7 +1,7 @@
-package model.pokedex
+package model
 
-import model.Namable
 import model.battle.Battleable
+import model.pokedex.{InvalidPokemonError, Pokedex, PokedexEntry}
 
 /**
   * Created by salim on 12/09/2016.

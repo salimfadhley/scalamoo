@@ -1,6 +1,6 @@
 package model
 
-import model.pokedex.{Pokedex, Pokemon}
+import model.pokedex.Pokedex
 import org.scalatest.FlatSpec
 
 /**

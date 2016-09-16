@@ -14,7 +14,7 @@ class GraphSpec extends FlatSpec with Matchers with BeforeAndAfterEach {
 
   override def beforeEach(): Unit = {
     super.beforeEach()
-    w = World.factory()
+    w = World.factory(snGenratorFactory())
   }
 
   "Nodes" can "be joined together to make edges" in {

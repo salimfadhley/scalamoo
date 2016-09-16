@@ -12,7 +12,7 @@ class RoomSpec extends FlatSpec with Matchers with BeforeAndAfterEach {
 
   override def beforeEach(): Unit = {
     super.beforeEach()
-    w = World.factory()
+    w = World.factory(snGenratorFactory())
     r = w.newRoom
   }
 
