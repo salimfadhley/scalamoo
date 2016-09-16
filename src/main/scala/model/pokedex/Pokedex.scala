@@ -12,6 +12,18 @@ class Pokedex {
   val pokemonTypes = mutable.HashMap[Int, PokemonType]()
   val types = mutable.HashMap[Int, Type]()
 
+  def getPokemonType(id: Int): Option[PokemonType] = {
+    pokemonTypes.get(id)
+  }
+
+  def getPokedexEntriesById(i: Int): Option[PokedexEntry] = {
+    pokemon.get(i)
+  }
+
+  def getType(i: Int): Option[Type] = {
+    types.get(i)
+  }
+
   def addPokedexEntry(row: Map[String, String]): Unit = {
     val pe: PokedexEntry = PokedexEntry.fromMap(row)
     pokemon.put(pe.id, pe)
@@ -27,14 +39,12 @@ class Pokedex {
     types.put(pt.id, pt)
   }
 
-  def getPokedexEntriesById(i: Int): Option[PokedexEntry] = {
-    pokemon.get(i)
-  }
 
 
 }
 
 object Pokedex {
+
 
   def boot: Pokedex = {
     val p = new Pokedex()

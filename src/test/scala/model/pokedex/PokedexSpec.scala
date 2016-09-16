@@ -66,4 +66,15 @@ class PokedexSpec extends FlatSpec with Matchers {
     assert(catarpie.get.id == 10)
   }
 
+  it should "be able to get types for pokemon" in {
+    val pokedex = Pokedex.boot
+
+    val e: Type = pokedex.getType(13).get
+    assert(e.identifier == "electric")
+    val pikachu: PokedexEntry = pokedex.getPokedexEntriesById(25).get
+
+    assert(pikachu.getType(pokedex) == e)
+
+  }
+
 }
