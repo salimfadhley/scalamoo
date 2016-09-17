@@ -19,9 +19,11 @@ class PokemonSpec extends FlatSpec {
     val pokedex: Pokedex = Pokedex.boot
     val p: Pokemon = Pokemon.spawn(pokedex, 25)
     assert(p.hitPoints == p.maxHitPoints)
+    assert(p.canBattle)
     p.doDamage(p.maxHitPoints)
     assert(p.hitPoints == 0)
     assert(p.battleStatus == Status.Unconcious)
+    assert(!p.canBattle)
   }
 
   "it" can "never go below zero hit points" in {

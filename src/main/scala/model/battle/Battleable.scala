@@ -12,12 +12,13 @@ trait Battleable {
     damagePoints += points
   }
 
+  def canBattle = !(battleStatus == Status.Unconcious)
+
   def battleStatus: Status.Value = {
     hitPoints match {
       case 0 => Status.Unconcious
       case _ => Status.OK
     }
-
   }
 
   def hitPoints = {

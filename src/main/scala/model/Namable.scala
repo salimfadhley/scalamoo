@@ -14,5 +14,5 @@ trait Namable[T] {
   def setName(n: String) = {
     name = Some(n)
   }
-
 }
+
