@@ -16,6 +16,10 @@ trait Trainer {
     }
   }
 
+  def hasBattleablePokemon: Boolean = {
+    getPokemon.exists(_.canBattle)
+  }
+
   def getPokemon: List[Pokemon] = {
     pokemon.toIterator.toList
   }
