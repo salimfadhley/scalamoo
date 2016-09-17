@@ -4,9 +4,28 @@ package model.battle
   * Created by salim on 12/09/2016.
   */
 trait Battleable {
-  var battleStatus = Status.OK
+
   var maxHitPoints: Int
-  var damage: Int = 0
+  var damagePoints: Int = 0
+
+  def doDamage(points: Int) = {
+    damagePoints += points
+  }
+
+  def battleStatus: Status.Value = {
+    hitPoints match {
+      case 0 => Status.Unconcious
+      case _ => Status.OK
+    }
+
+  }
+
+  def hitPoints = {
+    math.max(maxHitPoints - damagePoints, 0)
+  }
+
+
+
 
 
 }

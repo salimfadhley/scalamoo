@@ -7,10 +7,9 @@ import model.pokedex.{InvalidPokemonError, Pokedex, PokedexEntry}
   * Created by salim on 12/09/2016.
   */
 case class Pokemon(pokedexEntry: PokedexEntry) extends Battleable with Namable[Pokemon] {
-
-
-
   override var maxHitPoints: Int = 1
+
+
 }
 
 object Pokemon {
