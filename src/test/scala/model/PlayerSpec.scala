@@ -45,12 +45,9 @@ class PlayerSpec extends FlatSpec with Matchers {
   it should "know if you have at least one battleable pokemon" in {
     val game = Game.boot()
     val player: Player = game.spawnPlayer.named("Pootle")
-
     player.addPokemon(Pokemon.spawn(game.pokedex, 1))
     player.addPokemon(Pokemon.spawn(game.pokedex, 2))
     player.addPokemon(Pokemon.spawn(game.pokedex, 3))
-
-
   }
 
 
