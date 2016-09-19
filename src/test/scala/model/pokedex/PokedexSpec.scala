@@ -22,15 +22,11 @@ class PokedexSpec extends FlatSpec with Matchers {
     assert(pe.base_experience == 173)
     assert(pe.order == 774)
     assert(pe.is_default == true)
-
-
-
   }
 
 
   it should "be able to get types for pokemon" in {
     val pokedex = Pokedex.boot
-
     val e: Type = pokedex.getType(13).get
     assert(e.identifier == "electric")
     val pikachu: PokedexEntry = pokedex.getPokedexEntriesById(25).get
