@@ -11,6 +11,8 @@ class Pokedex {
   val pokemon = mutable.HashMap[Int, PokedexEntry]()
   val pokemonTypes = mutable.HashMap[Int, PokemonType]()
   val types = mutable.HashMap[Int, Type]()
+  val moves = mutable.HashMap[Int, Move]()
+  val pokemonMoves = mutable.HashMap[Int, PokemonMove]()
 
   def getPokemonType(id: Int): Option[PokemonType] = {
     pokemonTypes.get(id)
@@ -41,7 +43,16 @@ class Pokedex {
 
   def addMove(row: Map[String, ConvertibleThing]): Unit = {
     val mv: Move = Move.fromMap(row)
+    moves.put(mv.id, mv)
   }
+
+  def addPokemonMove(row: Map[String, ConvertibleThing]): Unit = {
+    val mv: PokemonMove = PokemonMove.fromMap(row)
+    pokemonMoves.put(mv.pokemon_id, mv)
+  }
+
+
+
 
 }
 
@@ -54,6 +65,7 @@ object Pokedex {
     openStreamAndLoad("pokemon_types", p.addPokemonType)
     openStreamAndLoad("types", p.addType)
     openStreamAndLoad("moves", p.addMove)
+    openStreamAndLoad("pokemon_moves", p.addPokemonMove)
 
     p
   }
