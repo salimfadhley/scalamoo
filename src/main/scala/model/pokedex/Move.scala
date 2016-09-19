@@ -4,10 +4,11 @@ package model.pokedex
   * Created by salim on 12/09/2016.
   */
 
-case class Move(id: Int, identifier: String, generation_id: Int, power: Int, pp: Int, accuracy: Int, priority: Int, target_id: Int, damage_class_id: Int, effect_id: Int, effect_chance: Int, contest_type_id: Int) {
+case class Move(id: Int, identifier: String, generation_id: Int, power: Int, pp: Int, accuracy: Int, priority: Int, target_id: Int, damage_class_id: Int, effect_id: Int, effect_chance: Int, contest_type_id: Int) extends DexClass {
+  def uid = id
 }
 
-object Move extends DexThing[Move] {
+object Move extends DexObject[Move] {
   override def fromMap(row: Map[String, ConvertibleThing]): Move = Move(
     row("id").i,
     row("identifier").s,

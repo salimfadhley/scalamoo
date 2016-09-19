@@ -2,8 +2,6 @@ package model.pokedex
 
 import org.scalatest.{FlatSpec, Matchers}
 
-import scala.io.Source
-
 /**
   * Created by salim on 12/09/2016.
   */
@@ -14,10 +12,6 @@ class PokedexSpec extends FlatSpec with Matchers {
 
   it should "be possible to load data from a resource" in {
     val p: Pokedex = new Pokedex()
-
-
-    Pokedex.openStreamAndLoad("pokemon", p.addPokedexEntry)
-
     val pe: PokedexEntry = p.getPokedexEntriesById(691).get
 
     assert(pe.id == 691)
@@ -33,38 +27,6 @@ class PokedexSpec extends FlatSpec with Matchers {
 
   }
 
-  it should "be able to decode pokedex entries" in {
-    val p: Pokedex = new Pokedex()
-    val input: String =
-      """id,identifier,species_id,height,weight,base_experience,order,is_default
-        |1,bulbasaur,1,7,69,64,1,1""".stripMargin
-    Pokedex.loadItemsFromSource(p.addPokedexEntry, Source.fromString(input))
-    val bulbasaur: PokedexEntry = p.getPokedexEntriesById(1).get
-  }
-
-  it should "be able to decode pokedex single line loads" in {
-    val p: Pokedex = new Pokedex()
-    val input: String =
-      """id,identifier,species_id,height,weight,base_experience,order,is_default
-        |1,bulbasaur,1,7,69,64,1,1""".stripMargin
-    Pokedex.loadItemsFromSource(p.addPokedexEntry, Source.fromString(input))
-    val bulbasaur: PokedexEntry = p.getPokedexEntriesById(1).get
-    assert(bulbasaur.id == 1)
-    assert(bulbasaur.name == "bulbasaur")
-  }
-
-  it should "be able to decode pokedex multi line loads" in {
-    val p: Pokedex = new Pokedex()
-    val input: String =
-      """id,identifier,species_id,height,weight,base_experience,order,is_default
-        |1,bulbasaur,1,7,69,64,1,1
-        |10,caterpie,10,3,29,39,14,1""".stripMargin
-
-    Pokedex.loadItemsFromSource(p.addPokedexEntry, Source.fromString(input))
-
-    val catarpie: Option[PokedexEntry] = p.getPokedexEntriesById(10)
-    assert(catarpie.get.id == 10)
-  }
 
   it should "be able to get types for pokemon" in {
     val pokedex = Pokedex.boot
