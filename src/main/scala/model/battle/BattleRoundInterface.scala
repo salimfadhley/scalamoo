@@ -5,4 +5,9 @@ package model.battle
   */
 trait BattleRoundInterface {
 
+  val p1Strategy: BattleStrategy
+  val p2Strategy: BattleStrategy
+
+  def round: BattleRoundOutcome
+
 }

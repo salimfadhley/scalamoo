@@ -13,9 +13,9 @@ case class PokedexEntry(id: Int, name: String, species_id: Int, height: Int, wei
 }
 
 object PokedexEntry extends DexThing[PokedexEntry] {
-  override def fromMap(row: Map[String, String]): PokedexEntry = PokedexEntry(
+  override def fromMap(row: Map[String, ConvertibleThing]): PokedexEntry = PokedexEntry(
     row("id").i,
-    row("identifier"),
+    row("identifier").s,
     row("species_id").i,
     row("height").i,
     row("weight").i,

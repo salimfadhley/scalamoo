@@ -5,6 +5,6 @@ package model.pokedex
   */
 trait DexThing[T] {
 
-  def fromMap(row: Map[String, String]): T
+  def fromMap(row: Map[String, ConvertibleThing]): T
 
 }

@@ -8,9 +8,9 @@ case class Type(id: Int, identifier: String, generation_id: Int, damage_class_id
 }
 
 object Type extends DexThing[Type] {
-  override def fromMap(row: Map[String, String]): Type = Type(
+  override def fromMap(row: Map[String, ConvertibleThing]): Type = Type(
     row("id").i,
-    row("identifier").s,
+    row("identifier")._s,
     row("generation_id").i,
     row("damage_class_id").i
   )

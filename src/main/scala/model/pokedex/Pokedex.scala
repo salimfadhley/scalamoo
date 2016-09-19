@@ -24,17 +24,17 @@ class Pokedex {
     types.get(i)
   }
 
-  def addPokedexEntry(row: Map[String, String]): Unit = {
+  def addPokedexEntry(row: Map[String, ConvertibleThing]): Unit = {
     val pe: PokedexEntry = PokedexEntry.fromMap(row)
     pokemon.put(pe.id, pe)
   }
 
-  def addPokemonType(row: Map[String, String]): Unit = {
+  def addPokemonType(row: Map[String, ConvertibleThing]): Unit = {
     val pt: PokemonType = PokemonType.fromMap(row)
     pokemonTypes.put(pt.pokemon_id, pt)
   }
 
-  def addType(row: Map[String, String]): Unit = {
+  def addType(row: Map[String, ConvertibleThing]): Unit = {
     val pt: Type = Type.fromMap(row)
     types.put(pt.id, pt)
   }
@@ -55,14 +55,14 @@ object Pokedex {
     p
   }
 
-  def openStreamAndLoad(s: String, addEntry: (Map[String, String]) => Unit) = {
+  def openStreamAndLoad(s: String, addEntry: (Map[String, ConvertibleThing]) => Unit) = {
     val path: String = s"/pokedex/pokedex/data/csv/$s.csv"
     val data: Source = Source.fromInputStream(getClass.getResourceAsStream(path))
     loadItemsFromSource(addEntry, data)
   }
 
-  def loadItemsFromSource(addEntry: (Map[String, String]) => Unit, data: Source): Unit = {
-    CSVReader.open(data).iteratorWithHeaders.foreach(addEntry)
+  def loadItemsFromSource(addEntry: (Map[String, ConvertibleThing]) => Unit, data: Source): Unit = {
+    CSVReader.open(data).iteratorWithHeaders.map(stringMapToConvertibleMap).foreach(addEntry)
   }
 
 
