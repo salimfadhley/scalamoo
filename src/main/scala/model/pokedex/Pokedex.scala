@@ -8,11 +8,11 @@ import scala.io.Source
   * Created by salim on 12/09/2016.
   */
 class Pokedex {
-  val pokemon = mutable.HashMap[Int, PokedexEntry]()
-  val pokemonTypes = mutable.HashMap[Int, PokemonType]()
-  val types = mutable.HashMap[Int, Type]()
-  val moves = mutable.HashMap[Int, Move]()
-  val pokemonMoves = mutable.HashMap[Int, PokemonMove]()
+  lazy val pokemon = mutable.HashMap[Int, PokedexEntry]()
+  lazy val pokemonTypes = mutable.HashMap[Int, PokemonType]()
+  lazy val types = mutable.HashMap[Int, Type]()
+  lazy val moves = mutable.HashMap[Int, Move]()
+  lazy val pokemonMoves = mutable.HashMap[Int, PokemonMove]()
 
   def getPokemonType(id: Int): Option[PokemonType] = {
     pokemonTypes.get(id)
