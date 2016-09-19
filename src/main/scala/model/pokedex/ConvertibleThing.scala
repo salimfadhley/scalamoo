@@ -5,7 +5,7 @@ package model.pokedex
   */
 case class ConvertibleThing(_s: String) {
 
-  def i: Int = {
+  implicit def i: Int = {
     try {
       _s.toInt
     } catch {

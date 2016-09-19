@@ -39,7 +39,9 @@ class Pokedex {
     types.put(pt.id, pt)
   }
 
-
+  def addMove(row: Map[String, ConvertibleThing]): Unit = {
+    val mv: Move = Move.fromMap(row)
+  }
 
 }
 
@@ -51,6 +53,7 @@ object Pokedex {
     openStreamAndLoad("pokemon", p.addPokedexEntry)
     openStreamAndLoad("pokemon_types", p.addPokemonType)
     openStreamAndLoad("types", p.addType)
+    openStreamAndLoad("moves", p.addMove)
 
     p
   }
