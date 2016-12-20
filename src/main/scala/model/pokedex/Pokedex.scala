@@ -15,7 +15,7 @@ class Pokedex {
 
 
   def streamToMap[T <: DexClass](source: String, fromMap: (Map[String, ConvertibleThing]) => T) = {
-    val path: String = s"/pokedex/pokedex/data/csv/$source.csv"
+    val path: String = s"/csv/$source.csv"
     val data: Source = Source.fromInputStream(getClass.getResourceAsStream(path))
     CSVReader.open(data).iteratorWithHeaders.map(stringMapToConvertibleMap).map(fromMap).map((t: T) => (t.uid, t)).toMap
   }
