@@ -1,6 +1,6 @@
 name := "scalamoo"
-version := "0.0.1"
-scalaVersion := "2.11.8"
+version := "0.0.2"
+scalaVersion := "2.12.2"
 
 resolvers += "scalac repo" at "https://raw.githubusercontent.com/ScalaConsultants/mvn-repo/master/"
 
