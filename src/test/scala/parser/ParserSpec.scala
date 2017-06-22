@@ -1,12 +1,12 @@
-package parser
-
-import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, Matchers}
-
-/**
-  * Created by salim on 18/08/2016.
-  */
-class ParserSpec extends FlatSpec with MockFactory with Matchers {
+//package parser
+//
+//import org.scalamock.scalatest.MockFactory
+//import org.scalatest.{FlatSpec, Matchers}
+//
+///**
+//  * Created by salim on 18/08/2016.
+//  */
+//class ParserSpec extends FlatSpec with MockFactory with Matchers {
 
   //  "parser" should "exist" in {
   //    val pl = new Player("Pootle")
@@ -31,10 +31,10 @@ class ParserSpec extends FlatSpec with MockFactory with Matchers {
   //    pa.parse(instruction="go south")
   //  }
   //
-
-
-
-
-
-
-}
+//
+//
+//
+//
+//
+//
+//}

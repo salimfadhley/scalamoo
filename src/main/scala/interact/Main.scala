@@ -1,5 +1,7 @@
 package interact
 
+import scala.io.Source
+
 
 /**
   * Created by salim on 6/19/2017.
@@ -7,9 +9,16 @@ package interact
 object Main extends App {
 
   def fnInteract(s:String):String = s"Hello $s\n"
+  val ls = new LoginService()
 
-  val i = new Interaction(fnInteract)
+  val login = new Login(ls)
+  val gl = new GameLoop(fnInteract)
 
-  i.interact(System.in, System.out)
+  val io = InputOutput(Source.fromInputStream(System.in).getLines(), (s:String) => System.out.print(s"${s}\n"))
+
+  val inputIterator: Iterator[String] = Source.fromInputStream(System.in).getLines()
+
+  login.interact(io)
+  gl.interact(io)
 
 }

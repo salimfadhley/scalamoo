@@ -1,20 +1,12 @@
 package interact
 
-import java.io._
-
-import scala.io.Source
+import java.io.{InputStream, PrintStream}
 
 /**
-  * Created by salim on 6/19/2017.
+  * Created by sal on 21/06/17.
   */
-class Interaction(interactionFunction:(String)=>String) {
+trait Interaction {
 
-  def interact(in:InputStream, out:PrintStream): Unit = {
-    for (s <- Source.fromInputStream(in).getLines()) {
-      out.print(interactionFunction(s))
-    }
-  }
+  def interact(io:InputOutput): Unit
 
 }
-
-
