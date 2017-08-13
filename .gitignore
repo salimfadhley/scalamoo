@@ -21,6 +21,7 @@ project
 
 # Created by .ignore support plugin (hsz.mobi)
 .idea/*.xml
+.idea/**/*.xml
 .idea/libraries/
 .idea/modules/
 src/main/java/
