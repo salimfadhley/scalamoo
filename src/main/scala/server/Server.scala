@@ -1,18 +1,22 @@
-import java.io._
-import java.net._
+import java.io.{InputStream, OutputStream}
+import java.net.ServerSocket
 
-import scala.io._
+import scala.concurrent.Future
+import scala.util.Try
 
-object Server extends App {
-  val server = new ServerSocket(9999)
-  while (true) {
-    val s = server.accept()
-    val in = new BufferedSource(s.getInputStream()).getLines()
-    val out = new PrintStream(s.getOutputStream())
+import scala.concurrent.ExecutionContext.Implicits.global
 
-    out.println(in.next())
-    out.flush()
-    s.close()
+object Server extends App{
+  val acceptor = new ServerSocket(2223)
+
+  def serve(getInputStream: InputStream, getOutputStream: OutputStream): Unit = {
+    getOutputStream.write("ddddd".toByte)
+  }
+
+  while(true) {
+    val socket = acceptor.accept
+    val f:Future[Unit] = Future { serve(socket.getInputStream, socket.getOutputStream )}
+    f.onComplete((triedUnit: Try[Unit]) =>socket.close())
   }
 }
 
